@@ -1,0 +1,27 @@
+{
+	"name": "Word 2016",
+	"tags": ["global_stuff", "window_executable_word"],
+	"vocabulary": {
+	},
+	"shortcuts": {
+		"open": "c-o",
+		"new file": "c-n",
+		"steak": "c-s",
+		"lice": "end,enter",
+		"shift slap": "s-enter",
+		"full stop": "dot",
+		"style normal": "sca-n",
+		"heading one": "ca-1",
+		"heading two": "ca-2",
+		"heading three": "ca-3",
+		"heading four": "ca-4",
+		"subscript": "c-equal",
+		"superscript": "c-plus",
+		"bullet list": "ca-b",
+		"numbered list": "a-h,n",
+		"bold line": "end,s-home,c-b,left",
+		"test as PDF": "a-f/20,a/20,1/20,a-t/10,p/5,a-o/10,a-d/5,enter/10,enter",
+		"zoom in": "c-pgup",
+		"zoom out": "c-pgdown"
+	}
+}

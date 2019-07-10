@@ -1,0 +1,10 @@
+{
+	"name": "matlab",
+	"tags": ["sublime", "matlab", "matlab_file"],
+	"vocabulary": {
+		"logic and": "&&",
+		"logic or": "||",
+		"logic not": "~",
+		"clear all": "clear all;"
+	}
+}

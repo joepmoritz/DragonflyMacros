@@ -1,0 +1,29 @@
+{
+	"name": "folders",
+	"tags": ["terminal", "matlab", "matlab_file"],
+	"vocabulary": {
+		"My Documents": "MyDocuments",
+		"documents": "Documents",
+		"skin": "Skin",
+		"Matlab utils": "MatlabUtils",
+		"heightfield renders": "HeightfieldRenders",
+		"texture synthesis code": "TextureSynthesisCode",
+		"C C zero textures": "CC0Textures",
+		"saliency C V P R": "SaliencyCVPR",
+		"saliency filters": "SaliencyFilters",
+		"Spectral residual": "SpectralResidual",
+		"my textures": "MyTextures",
+		"images": "Images",
+		"Libs": "Libs",
+		"Make Tileable": "MakeTileable",
+		"sources": "sources",
+		"sources all": "sources_all",
+		"tiled results": "tiled_results",
+		"weight maps": "weight_maps",
+		"without weights": "without_weights",
+		"ranked results": "ranked_results",
+		"fourier results": "fourier_results",
+		"saliency maps": "saliency_maps",
+		"results": "results"
+	}
+}

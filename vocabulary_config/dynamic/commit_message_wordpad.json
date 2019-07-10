@@ -1,0 +1,9 @@
+{
+	"name": "CommitMessageWordpad",
+	"tags": ["global_stuff", "window_title_commit_message_wordpad"],
+	"vocabulary": {
+	},
+	"shortcuts": {
+		"commit": "a-f4/50,enter"
+	}
+}

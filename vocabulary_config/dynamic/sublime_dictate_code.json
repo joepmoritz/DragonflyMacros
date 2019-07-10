@@ -1,0 +1,10 @@
+{
+	"name": "NotepadDictateCode",
+	"tags": ["sublime", "window_title_dictate_code"],
+	"vocabulary": {
+	},
+	"shortcuts": {
+		"cancel": "scw-f7",
+		"transfer": "c-a/3,c-c/3,scw-f7/50,g,i/3,c-a/3,c-v"
+	}
+}

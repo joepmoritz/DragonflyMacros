@@ -1,0 +1,29 @@
+{
+	"name": "matlab_keywords",
+	"tags": ["keywords", "matlab_keywords", "matlab_file"],
+	"vocabulary": {
+		"true":        "true",
+		"false":       "false",
+		"figure":      "figure;",
+		"width":       "width",
+		"height":      "height",
+		"global":      "global ",
+		"end":         "end",
+		"pause":       "pause",
+		"return":      "return",
+		"break":       "break;",
+		"continue":    "continue;",
+		"switch":      "switch ",
+		"case":        "case ",
+		"otherwise":   "otherwise",
+		"pie":         "pi",
+		"tick":        "tic;",
+		"tock":        "toc;",
+		"hold on":     "hold on;",
+		"var arg in":  "varargin",
+		"varargin":    "varargin",
+		"var arg out": "varargout",
+		"varargout":   "varargout",
+		"nargin":      "nargin"
+	}
+}

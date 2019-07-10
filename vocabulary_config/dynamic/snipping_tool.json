@@ -1,0 +1,9 @@
+{
+	"name": "Snipping tool",
+	"tags": ["global_stuff", "window_executable_snipping_tool"],
+	"vocabulary": {
+	},
+	"shortcuts": {
+		"new": "c-n"
+	}
+}

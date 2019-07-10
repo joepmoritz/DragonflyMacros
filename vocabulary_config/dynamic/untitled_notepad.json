@@ -1,0 +1,10 @@
+{
+	"name": "UntitledNotepad",
+	"tags": ["global_stuff", "window_title_untitled_notepad"],
+	"vocabulary": {
+	},
+	"shortcuts": {
+		"commit": "a-f4/25,enter",
+		"cancel": "c-a/5,del/5,a-f4"
+	}
+}

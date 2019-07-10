@@ -1,0 +1,13 @@
+{
+	"name": "Keepass",
+	"tags": ["global_stuff", "window_executable_keepass"],
+	"vocabulary": {
+	},
+	"shortcuts": {
+		"open": "c-o",
+		"copy password": "c-c",
+		"copy username": "c-b",
+		"twink": "sc-tab",
+		"trip": "c-tab"
+	}
+}

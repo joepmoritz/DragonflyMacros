@@ -1,0 +1,14 @@
+{
+	"name": "JavaScript",
+	"tags": ["sublime", "js_file"],
+	"vocabulary": {
+		"logic and": "&&",
+		"logic or": "||",
+		"length": ".length",
+		"snip log": "console.log(",
+		"snip require": "require('"
+	},
+	"shortcuts": {
+		"arrow": "c-dot"
+	}
+}

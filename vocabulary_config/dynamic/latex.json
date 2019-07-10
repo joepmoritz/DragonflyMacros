@@ -1,0 +1,31 @@
+{
+	"name": "latex",
+	"tags": ["sublime_finishers", "latex_file", "other_chrome_finishers"],
+	"vocabulary": {
+		"omega best": "$\\omega_{best}$ ",
+		"math source patch": "\\sourcepatch",
+		"math target patch": "\\targetpatch",
+		"math bold": "\\mathbf{",
+		"math italic": "\\mathit{",
+		"math cal": "\\mathcal{",
+		"math fraction": "\\frac{",
+		"math exists": "\\exists ",
+		"math in": "\\in ",
+		"math left": "\\left",
+		"math right": "\\right",
+		"snip unsure": "\\unsure{",
+		"snip label": "\\label{",
+		"snip caption": "\\caption{",
+		"snip ref": "\\ref{",
+		"snip cite": "\\cite{",
+		"snip input": "\\input{",
+		"snip chapter": "\\chapter{",
+		"snip section": "\\section{",
+		"snip subsection": "\\subsection{",
+		"snip my subsection": "\\mysubsection{",
+		"snip include graphics": "\\includegraphics[width=\\textwidth]{",
+		"lambda": "\\lambda",
+		"cap omega": "\\Omega",
+		"omega": "\\omega"
+	}
+}

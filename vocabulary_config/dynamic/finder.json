@@ -1,0 +1,31 @@
+{
+	"name": "finder",
+	"tags": ["finder"],
+	"shortcuts": {
+		"open": "enter",
+		"properties": "a-enter",
+		"delete": "delete",
+		"kill": "delete",
+		"back": "a-left",
+		"foreward": "a-right",
+		"address bar": "a-d",
+		"new window": "c-n",
+		"new folder": "cs-n",
+		"rename": "f2",
+		"preview pane": "a-v/10,p",
+		"dupe": "c-c/10,c-v",
+		"copy filename": "f2,s-end,c-c,escape",
+		"open with sublime": "w-apps,o,o,enter",
+		"extract here": "w-apps/10,x/50,a-h/10,enter",
+		"subset": "w-apps/10,n/10,m/10,m/10,m/10,enter",
+		"fit columns": "a-v,s,f",
+		"column date": "a-v/10,a/10,enter",
+		"column type": "a-v/10,a/10,down/10,enter",
+		"column size": "a-v/10,a/10,down/10:2,enter",
+		"column tags": "a-v/10,a/10,down/10:3,enter",
+		"column dimensions": "a-v/10,a/10,down/10:7,enter",
+		"details": "a-v/10,l/10,pgup/10,right/10,right/10,down/10,enter",
+		"list view": "a-v/10,l/10,pgup/10,right/10,down/10,enter",
+		"extra large icons":            "a-v/50,l/50,pgup/20,enter"
+	}
+}

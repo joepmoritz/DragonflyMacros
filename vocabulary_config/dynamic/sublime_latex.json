@@ -1,0 +1,20 @@
+{
+	"name": "latex",
+	"tags": ["sublime_finishers", "latex_file"],
+	"vocabulary": {
+		"snip tabular": [{"type": "Key", "args": ["aw-n"]}, {"type": "Text", "args": ["tab\t"]}, {"type": "Key", "args": ["aw-u"]}],
+		"snip itemize": [{"type": "Key", "args": ["aw-n"]}, {"type": "Text", "args": ["item\t"]}, {"type": "Key", "args": ["aw-u"]}],
+		"snip enumerate": [{"type": "Key", "args": ["aw-n"]}, {"type": "Text", "args": ["enum\t"]}, {"type": "Key", "args": ["aw-u"]}],
+		"snip figure": [{"type": "Key", "args": ["aw-n"]}, {"type": "Text", "args": ["bfigure\t"]}, {"type": "Key", "args": ["aw-u"]}],
+		"snip equation": [{"type": "Key", "args": ["aw-n"]}, {"type": "Text", "args": ["eq\t"]}, {"type": "Key", "args": ["aw-u"]}]
+	},
+	"shortcuts": {
+		"build PDF": "c-b",
+		"show PDF": "c-l,v",
+		"hard wrap": "a-q",
+		"soft wrap": "s-pgdown,c-j",
+		"add item": "end,s-enter",
+		"snip item": "end,s-enter",
+		"snip begin": "c-l,c-n"
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"name": "finder",
+	"tags": ["finder"],
+	"vocabulary": {
+	},
+
+	"shortcuts": {
+		"shrink image": "f2,s-end,c-c,escape/50,f8/100,s,h,r,i,n,k,i/10,tab/10,lparen,squote,c-v,squote,rparen,enter,f5/50,space"
+	}
+}

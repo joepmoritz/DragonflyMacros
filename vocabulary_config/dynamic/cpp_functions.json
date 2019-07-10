@@ -1,0 +1,14 @@
+{
+	"name": "cpp_functions",
+	"tags": ["functions", "cpp_file"],
+	"vocabulary": {
+		"func print F":                  "printf",
+		"func assert":                  "assert",
+		"func sort": "sort",
+		"func begin": "begin",
+		"func end": "end",
+		"S T D sort": "std::sort",
+		"met size": ".size",
+		"met pushback":          ".push_back"
+	}
+}

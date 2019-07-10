@@ -1,0 +1,18 @@
+{
+	"name": "javascript_keywords",
+	"tags": ["keywords", "js_file"],
+	"vocabulary": {
+		"if":     "if",
+		"else":     "else",
+		"new":     "new",
+		"var":     "var",
+		"null":     "null",
+		"break":   "break;",
+		"true":    "true",
+		"false":   "false",
+		"return":  "return",
+		"throw":   "throw",
+		"in":      "in",
+		"const":   "const"
+	}
+}

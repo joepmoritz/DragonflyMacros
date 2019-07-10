@@ -1,0 +1,10 @@
+{
+	"name": "matlab commands",
+	"tags": ["matlab"],
+	"vocabulary": {
+		"help": "help ",
+		"clear all": [{"type": "Text", "args": ["clear all"]}, {"type": "Key", "args": ["enter"]}],
+		"close all": [{"type": "Text", "args": ["close all"]}, {"type": "Key", "args": ["enter"]}],
+		"list dir": [{"type": "Text", "args": ["ls"]}, {"type": "Key", "args": ["enter"]}]
+	}
+}

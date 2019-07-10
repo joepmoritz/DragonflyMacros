@@ -1,0 +1,14 @@
+{
+	"name": "Paint",
+	"tags": ["global_stuff", "window_executable_paint"],
+	"vocabulary": {
+	},
+	"shortcuts": {
+		"open": "c-o",
+		"new file": "c-n",
+		"steak": "c-s",
+		"zoom in": "c-pgup",
+		"zoom out": "c-pgdown",
+		"trip": "c-tab"
+	}
+}

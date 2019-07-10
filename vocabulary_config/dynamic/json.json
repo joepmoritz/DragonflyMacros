@@ -1,0 +1,7 @@
+{
+	"name": "json",
+	"tags": ["sublime", "json_file"],
+	"vocabulary": {
+		"add entry": [{"type": "Key", "args": ["c-enter"]}, {"type": "Text", "args": ["add"]}, {"type": "Key", "args": ["tab"]}]
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"name": "C plus plus",
+	"tags": ["sublime", "cpp_file"],
+	"vocabulary": {
+		"logic and": "&&",
+		"logic or": "||",
+		"using STD": "using namespace std;",
+		"template":           [{"type": "Text", "args": ["template<>"]}, {"type": "Key", "args": ["left:1"]}],
+		"STD": "std::",
+		"unique pointer":           [{"type": "Text", "args": ["unique_ptr<>"]}, {"type": "Key", "args": ["left:1"]}],
+		"include": "#include ",
+		"pragma once": "#pragma once"
+	},
+	"shortcuts": {
+		"arrow": "c-dot"
+	}
+}

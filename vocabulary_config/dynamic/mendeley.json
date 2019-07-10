@@ -1,0 +1,15 @@
+{
+	"name": "mendeley",
+	"tags": ["global_stuff", "window_executable_mendeley"],
+	"vocabulary": {
+	},
+	"shortcuts": {
+		"trip": "c-pagedown",
+		"twink": "c-pageup",
+		"copy citation": "cs-c",
+		"zoom out": "c-minus",
+		"zoom in": "c-equal",
+		"synchronize": "a-f,up:3,enter",
+		"open": "c-apps,down,down,down,enter"
+	}
+}

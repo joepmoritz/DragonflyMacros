@@ -1,0 +1,52 @@
+[{
+	"name": "Speech Coding",
+	"tags": ["functions", "python_file", "sublime_addon"],
+	"vocabulary": {
+		"met begin": ".begin",
+		"met end": ".end",
+		"met clear": ".clear",
+		"met subtract": ".subtract",
+		"met cover": ".cover",
+		"view selection": "view.sel",
+		"view erase": "view.erase",
+		"view size": "view.size",
+		"view find": "view.find",
+		"view substring": "view.substr",
+		"view classify": "view.classify",
+		"view find by class": "view.find_by_class",
+		"view name": "view.name",
+		"view set name": "view.set_name",
+		"view close": "view.close",
+		"view set scratch": "view.set_scratch",
+		"view set read only": "view.set_read_only",
+		"view score selector": "view.score_selector",
+		"met new file": ".new_file",
+		"met set layout": ".set_layout",
+		"met set view index": ".set_view_index",
+		"met num groups":              ".num_groups",
+		"met views in group": ".views_in_group",
+		"met focus group": ".focus_group",
+		"sublime region": "sublime.Region",
+		"sublime windows": "sublime.windows",
+		"sublime active window": "sublime.active_window"
+	}
+},
+{
+	"name": "Speech Coding",
+	"tags": ["sublime", "python_file", "sublime_addon"],
+	"vocabulary": {
+		"edit": "edit",
+		"region": "region",
+		"view": "view",
+		"window": "window",
+		"sublime class word start": "sublime.CLASS_WORD_START",
+		"sublime class word end": "sublime.CLASS_WORD_END",
+		"sublime class sub word start": "sublime.CLASS_SUB_WORD_START",
+		"sublime class sub word end": "sublime.CLASS_SUB_WORD_END",
+		"sublime class line start": "sublime.CLASS_LINE_START",
+		"sublime class line end": "sublime.CLASS_LINE_END",
+		"sublime class punctuation start": "sublime.CLASS_PUNCTUATION_START",
+		"sublime class punctuation end": "sublime.CLASS_PUNCTUATION_END",
+		"sublime class empty line": "sublime.CLASS_EMPTY_LINE"
+	}
+}]

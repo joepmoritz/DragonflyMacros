@@ -1,0 +1,13 @@
+{
+	"name": "latex",
+	"tags": ["latex_file", "other_chrome_finishers"],
+	"vocabulary": {
+		"snip include graphics": "\\includegraphics[width=\\textwidth]{"
+	},
+	"shortcuts": {
+		"Build PDF": "c-dot",
+		"kill": "c-d",
+		"indent": "c-rbracket",
+		"unindent": "c-lbracket"
+	}
+}

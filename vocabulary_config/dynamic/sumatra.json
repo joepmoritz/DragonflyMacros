@@ -1,0 +1,14 @@
+{
+	"name": "Sumatra",
+	"tags": ["global_stuff", "window_executable_sumatra"],
+	"vocabulary": {
+	},
+	"shortcuts": {
+		"twink": "sc-tab",
+		"trip": "c-tab",
+		"serk": "c-f",
+		"back": "a-left",
+		"zoom in": "c-equal",
+		"zoom out": "c-minus"
+	}
+}
