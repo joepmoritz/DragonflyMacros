@@ -1,100 +1,116 @@
 import aenea.format
 
+from dragonfly import Key as DragonKey, Text as DragonText, Mouse as DragonMouse
 from dragonfly import *
+# from aenea.strict import Key as AeneaKey, Text as AeneaText, Mouse as AeneaMouse
+# from aenea.strict import *
 
 from SwapProgram import SwapProgramRule
 from util import DictateWords, NoCompile, MappingCountRule, RepeatRule
 # from tobii import *
 
+DEFAULT_KEY = DragonKey
+DEFAULT_TEXT = DragonText
+DEFAULT_MOUSE = DragonMouse
+
+def SwitchKey(text, win_text=None):
+	def MakeKey(cls=DEFAULT_KEY):
+		return cls(win_text if cls == DragonKey and win_text else text)
+	return MakeKey
+
+def ForceKey(text, cls=DEFAULT_KEY):
+	def MakeKey(unused):
+		return cls(text)
+	return MakeKey
+
 
 
 
 windows_commands = {
-	'clove <nn>':        Key('c-w/100:%(nn)d'),
-	'quit':              Key('a-f4'),
-	'flick':             Key('w-squote'),
-	'maximise':          Key('a-space/20,r/20,a-space/100,x'),
-	'minimise':          Key('a-space/20,r/20,a-space/100,n'),
-	'left window':       Key('a-space/5,x/10,w-left'),
-	'right window':      Key('a-space/5,x/10,w-right'),
-	'top window':        Key('w-up'),
-	'bottom window':     Key('w-down'),
-	'woosh':             Key('w-tab'),
-	'tapple':            Key('a-tab'),
+	'clove <nn>':        SwitchKey('w-w/100:%(nn)d', 'c-w/100:%(nn)d'),
+	'clove window':      SwitchKey('sw-w', 'cs-w'),
+	# 'preferences':       SwitchKey('w-comma'),
+	# 'quit':              SwitchKey('w-q', 'a-f4'),
+	'flick':             ForceKey('w-backtick'),
+	'maximise':          SwitchKey('wa-up', 'alt:down,space/20,x/20,alt:up'),
+	'minimise':          SwitchKey('w-m', 'a-space/10,alt:down,space/20,n/20,alt:up'),
+	'left window':       ForceKey('w-left'),
+	'right window':      ForceKey('w-right'),
+	# 'top window':        'w-upSwitchKey('),
+	# 'bottom window':     'w-downSwitchKey('),
+	# 'woosh':             'w-tabSwitchKey('),
+	'tapple':            ForceKey('a-tab'),
 }
 
 
 symbol_after_format_mapping = {
-	'eke': Key('equal'),
-	'plus': Key('plus'),
-	'minus': Key('minus'),
-	'dork': Key('dot'),
-	'pax': Key('lparen'),
-	'brax': Key('lbracket'),
-	'comma': Key('comma'),
-	'rike': Key('right'),
-	'ace': Key('space'),
-	'slash': Key('slash'),
-	'colon': Key('colon'),
-	'lex': Key('end'),
-	'steak': Key('c-s'),
-	'slap': Key('enter'),
+	'eke': 'equal',
+	'plus': 'plus',
+	'minus': 'minus',
+	'dork': 'dot',
+	'pax': 'lparen',
+	'brackets': 'lbracket',
+	'comma': 'comma',
+	'ripe': 'right',
+	'ace': 'space',
+	'slash': 'slash',
+	'colon': 'colon',
+	'lex': 'end',
+	'steak': 'w-s',
+	'slap': 'enter',
 }
 
 
 common_keys_mapping = {
 	# Keys
-	'slap <nn>' :                         Key('enter:%(nn)d'),
-	'ace <nn>' :                          Key('space:%(nn)d'),
-	'act' :                               Key('escape'),
-	'(tab | tap) <nn>' :                  Key('tab/20:%(nn)d/20'),
-	'backtab <nn>' :                      Key('s-tab/20:%(nn)d/20'),
-	'cop' :                               Key('c-c'),
-	'cut' :                               Key('c-x'),
-	'pake' :                              Key('c-v'),
-	'plain pake':                         Key('sc-v'),
-	'select all' :                        Key('c-a'),
-	'delete all' :                        Key('c-a,del'),
-	'copy all' :                          Key('c-a,c-c'),
-	'undo <nn>':                          Key('c-z:%(nn)d'),
-	'redo <nn>':                          Key('c-y:%(nn)d'),
-	'steak':                              Key('c-s'),
+	'slap <nn>' :                         SwitchKey('enter:%(nn)d'),
+	'ace <nn>' :                          SwitchKey('space:%(nn)d'),
+	'act' :                               SwitchKey('escape'),
+	'(tab | tap) <nn>' :                  SwitchKey('tab/20:%(nn)d/20'),
+	'backtab <nn>' :                      SwitchKey('s-tab/20:%(nn)d/20'),
+	'cop' :                               SwitchKey('w-c', 'c-c'),
+	'cut' :                               SwitchKey('w-x', 'c-x'),
+	'paste' :                             SwitchKey('w-v', 'c-v'),
+	'plain paste':                        SwitchKey('ws-v', 'cs-v'),
+	'select all' :                        SwitchKey('w-a', 'c-a'),
+	'delete all' :                        SwitchKey('w-a,del', 'c-a,del'),
+	'copy all' :                          SwitchKey('w-a,w-c', 'c-a,c-c'),
+	'undo <nn>':                          SwitchKey('w-z:%(nn)d','c-z:%(nn)d'),
+	'redo <nn>':                          SwitchKey('ws-z:%(nn)d','c-y:%(nn)d'),
+	'steak':                              SwitchKey('w-s','c-s'),
+	# 'don\'t save':                        SwitchKey('w-d'),
 
 	# Movement:
 	# The delay is to fix bug in sublime using command chain of open X dunce N slap
-	'pup <nn>' :                          Key('up/3:%(nn)d/4'),
-	'dos <nn>' :                          Key('down/3:%(nn)d/4'),
-	'loof <nn>' :                         Key('left/3:%(nn)d/4'),
-	'rike <nn>' :                         Key('right/3:%(nn)d/4'),
-	'woloof <nn>' :                       Key('c-left:%(nn)d'),
-	'wolike <nn>' :                       Key('c-right:%(nn)d'),
-	'subloof <nn>' :                      Key('a-left:%(nn)d'),
-	'sublike <nn>' :                      Key('a-right:%(nn)d'),
-	'lin' :                               Key('home'),
-	'lex' :                               Key('end'),
-	'win lin':                            Key('c-home'),
-	'win lex':                            Key('c-end'),
-	'grip <nn>':                          Key('pgup/10:%(nn)d'),
-	'drop <nn>':                          Key('pgdown/10:%(nn)d'),
+	'pup <nn>' :                          SwitchKey('up/3:%(nn)d/4'),
+	'(DOS | dunce) <nn>' :                SwitchKey('down/3:%(nn)d/4'),
+	'loof <nn>' :                         SwitchKey('left/3:%(nn)d/4'),
+	'ripe <nn>' :                         SwitchKey('right/3:%(nn)d/4'),
+	'woloof <nn>' :                       SwitchKey('a-left:%(nn)d', 'c-left:%(nn)d'),
+	'wolipe <nn>' :                       SwitchKey('a-right:%(nn)d', 'c-right:%(nn)d'),
+	'lin' :                               SwitchKey('w-left', 'home'),
+	'lex' :                               SwitchKey('w-right', 'end'),
+	'win lin':                            SwitchKey('w-up', 'c-home'),
+	'win lex':                            SwitchKey('w-down', 'c-end'),
+	'grip <nn>':                          SwitchKey('pgup/10:%(nn)d'),
+	'drop <nn>':                          SwitchKey('pgdown/10:%(nn)d'),
 
 	# selection:
-	'seloof <nn>' :                       Key('s-left/2:%(nn)d/2'),
-	'selike <nn>' :                       Key('s-right/2:%(nn)d/2'),
-	'sewoloof <nn>' :                     Key('sc-left:%(nn)d'),
-	'sewolike <nn>' :                     Key('sc-right:%(nn)d'),
-	'sesubloof <nn>' :                    Key('sa-left:%(nn)d'),
-	'sesublike <nn>' :                    Key('sa-right:%(nn)d'),
-	'skive up <nn>' :                     Key('home,s-up:%(nn)d'),
-	'skive <nn>' :                        Key('home,s-down:%(nn)d'),
-	'stick lin' :                         Key('s-home'),
-	'stick lex' :                         Key('s-end'),
+	'seloof <nn>' :                       SwitchKey('s-left/2:%(nn)d/2'),
+	'selipe <nn>' :                       SwitchKey('s-right/2:%(nn)d/2'),
+	'sewoloof <nn>' :                     SwitchKey('sa-left:%(nn)d','sc-left:%(nn)d'),
+	'sewolipe <nn>' :                     SwitchKey('sa-right:%(nn)d','sc-right:%(nn)d'),
+	'skive up <nn>' :                     SwitchKey('w-left,s-up:%(nn)d','home,s-up:%(nn)d'),
+	'skive <nn>' :                        SwitchKey('w-left,s-down:%(nn)d','home,s-down:%(nn)d'),
+	'stick lin' :                         SwitchKey('sw-left', 's-home'),
+	'stick lex' :                         SwitchKey('sw-right', 's-end'),
 
 	# deletion:
-	'leet <nn>' :                        Key('del:%(nn)d'),
-	'sack <nn>' :                        Key('backspace:%(nn)d'),
-	'chomp <nn>':                        Key('sc-right:%(nn)d, del'),
-	'smack <nn>':                        Key('sc-left:%(nn)d, del'),
-	'kill <nn>':                         Key('home,s-down:%(nn)d,del'),
+	'leet <nn>' :                        SwitchKey('del:%(nn)d'),
+	'sack <nn>' :                        SwitchKey('backspace:%(nn)d'),
+	'chomp <nn>':                        SwitchKey('sa-right:%(nn)d, del','sc-right:%(nn)d, del'),
+	'smack <nn>':                        SwitchKey('sa-left:%(nn)d, del','sc-left:%(nn)d, del'),
+	'kill <nn>':                         SwitchKey('w-left,s-down:%(nn)d,del','home,s-down:%(nn)d,del'),
 
 	# idea: split into prefix and suffix for action and subject
 	# movement: m
@@ -113,94 +129,100 @@ common_keys_mapping = {
 
 	# # Movement:
 	# # The delay is to fix bug in sublime using command chain of open X dunce N slap
-	# 'mup <nn>' :                          Key('up:%(nn)d/3'),
-	# 'munce <nn>' :                        Key('down:%(nn)d/3'),
-	# 'moof <nn>' :                         Key('left:%(nn)d'),
-	# 'myke <nn>' :                         Key('right:%(nn)d'),
-	# 'milk <nn>' :                         Key('c-left:%(nn)d'),
-	# 'murk <nn>' :                         Key('c-right:%(nn)d'),
-	# 'mince' :                               Key('home'),
-	# 'mandy' :                               Key('end'),
-	# 'mip <nn>':                          Key('pgup/10:%(nn)d'),
-	# 'mop <nn>':                          Key('pgdown/10:%(nn)d'),
+	# 'mup <nn>' :                          'up:%(nn)d/3',
+	# 'munce <nn>' :                        'down:%(nn)d/3',
+	# 'moof <nn>' :                         'left:%(nn)d',
+	# 'myke <nn>' :                         'right:%(nn)d',
+	# 'milk <nn>' :                         'c-left:%(nn)d',
+	# 'murk <nn>' :                         'c-right:%(nn)d',
+	# 'mince' :                               'home',
+	# 'mandy' :                               'end',
+	# 'mip <nn>':                          'pgup/10:%(nn)d',
+	# 'mop <nn>':                          'pgdown/10:%(nn)d',
 
 	# # selection:
-	# 'chup <nn>' :                     Key('s-up:%(nn)d'),
-	# 'chunce <nn>' :                        Key('s-down:%(nn)d'),
-	# 'choof <nn>' :                       Key('s-left:%(nn)d'),
-	# 'chyke <nn>' :                       Key('s-right:%(nn)d'),
-	# 'chilk <nn>' :                        Key('sc-left:%(nn)d'),
-	# 'churk <nn>' :                        Key('sc-right:%(nn)d'),
-	# 'chince' :                      Key('s-home'),
-	# 'chandy' :                             Key('s-end'),
-	# 'chip <nn>':                          Key('s-pgup/10:%(nn)d'),
-	# 'chop <nn>':                          Key('s-pgdown/10:%(nn)d'),
+	# 'chup <nn>' :                     's-up:%(nn)d',
+	# 'chunce <nn>' :                        's-down:%(nn)d',
+	# 'choof <nn>' :                       's-left:%(nn)d',
+	# 'chyke <nn>' :                       's-right:%(nn)d',
+	# 'chilk <nn>' :                        'sc-left:%(nn)d',
+	# 'churk <nn>' :                        'sc-right:%(nn)d',
+	# 'chince' :                      's-home',
+	# 'chandy' :                             's-end',
+	# 'chip <nn>':                          's-pgup/10:%(nn)d',
+	# 'chop <nn>':                          's-pgdown/10:%(nn)d',
 
 	# # delete:
-	# 'dup <nn>' :   Key('up:%(nn)d/3'),
-	# 'dunce <nn>' : Key('down:%(nn)d/3'),
-	# 'doof <nn>' :  Key('backspace:%(nn)d'),
-	# 'dyke <nn>' :  Key('del:%(nn)d'),
-	# 'dilk <nn>' :  Key('c-backspace:%(nn)d'),
-	# 'durk <nn>' :  Key('c-del:%(nn)d'),
-	# 'dince' :      Key('s-home,del'),
-	# 'dandy' :      Key('s-end,del'),
-	# 'dip <nn>':    Key('s-pgup/10:%(nn)d,del'),
-	# 'dop <nn>':    Key('s-pgdown/10:%(nn)d,del'),
-
-
+	# 'dup <nn>' :   'up:%(nn)d/3',
+	# 'dunce <nn>' : 'down:%(nn)d/3',
+	# 'doof <nn>' :  'backspace:%(nn)d',
+	# 'dyke <nn>' :  'del:%(nn)d',
+	# 'dilk <nn>' :  'c-backspace:%(nn)d',
+	# 'durk <nn>' :  'c-del:%(nn)d',
+	# 'dince' :      's-home,del',
+	# 'dandy' :      's-end,del',
+	# 'dip <nn>':    's-pgup/10:%(nn)d,del',
+	# 'dop <nn>':    's-pgdown/10:%(nn)d,del',
 }
 
+letter_mapping = aenea.misc.LETTERS
+symbol_mapping = aenea.misc.SYMBOLS
+
+format_mapping = {
+	'score <score_text>': '%(score_text)s',
+	'titan <titan_text>': '%(titan_text)s',
+	'camel <camel_text>': '%(camel_text)s',
+	'dash word <dash_word_text>': '%(dash_word_text)s',
+	'constant <constant_text>': '%(constant_text)s',
+	'jumble <jumble_text>': '%(jumble_text)s',
+	'sentence <sentence_text>': '%(sentence_text)s',
+	'say <say_text>': '%(say_text)s',
+}
+
+format_extras = [
+	Dictation(name='score_text').lower().replace(" ", "_"),
+	Dictation(name='titan_text').title().replace(" ", ""),
+	Dictation(name='camel_text').lower().camel(),
+	Dictation(name='dash_word_text').lower().replace(" ", "-"),
+	Dictation(name='constant_text').upper().replace(" ", "_"),
+	Dictation(name='jumble_text').replace(" ", ""),
+	Dictation(name='sentence_text').capitalize(),
+	Dictation(name='say_text'),
+]
 
 
+n = ShortIntegerRef(name='n', min=0, max=10000)
+n1 = {'n': 1}
+nn = NoCompile(Optional(Integer(min=0, max=99), default=1), name='nn')
+nn1 = {'nn': 1}
 
 
+def map_values(l, d):
+	return {k: l(v) for k, v in d.iteritems()}
+
+def create_mapping_rule(mapping, map_func=DEFAULT_KEY, extras=None, defaults=None, **kwargs):
+	return MappingRule(exported=False, mapping=map_values(map_func, mapping), extras=extras, defaults=defaults, **kwargs)
 
 
+def CommonKeysRule(mapping=common_keys_mapping, extras=[nn], defaults=nn1, map_func=DEFAULT_KEY, **kwargs):
+	return create_mapping_rule(mapping=mapping, map_func=lambda f: f(map_func), extras=extras, defaults=defaults, **kwargs)
 
 
-
-class CommonKeysRule(MappingCountRule):
-	exported = False
-	mapping = common_keys_mapping
+def LetterRule(mapping=letter_mapping, map_func=DEFAULT_KEY, **kwargs):
+	return create_mapping_rule(mapping=mapping, map_func=map_func, **kwargs)
 
 
-
-letter_mapping = dict((key, Key(value)) for (key, value) in aenea.misc.LETTERS.iteritems())
-class LetterRule(MappingRule):
-	exported = False
-	mapping = aenea.configuration.make_grammar_commands('shared', letter_mapping)
+def SymbolRule(mapping=symbol_mapping, map_func=DEFAULT_KEY, **kwargs):
+	return create_mapping_rule(mapping=mapping, map_func=map_func, **kwargs)
 
 
-symbol_mapping = dict((key, Key(value)) for (key, value) in aenea.misc.SYMBOLS.iteritems())
-class SymbolRule(MappingRule):
-	exported = False
-	mapping = aenea.configuration.make_grammar_commands('shared', symbol_mapping)
+def NumberRule(extras=[n], map_func=DEFAULT_TEXT, **kwargs):
+	return create_mapping_rule(mapping={'[num] <n>': '%(n)d'}, extras=extras, defaults=n1, map_func=map_func, **kwargs)
 
 
-class NumberRule(MappingRule):
-	exported = False
-	extras = [IntegerRef(name = 'n', min = 0, max = 49)]
-	defaults = {'n': 1}
-	mapping = aenea.configuration.make_grammar_commands('shared', {
-		'[num] <n>':     Text('%(n)d'),
-	})
+def WindowsRule(mapping=windows_commands, extras=[nn], defaults=nn1, map_func=DEFAULT_KEY, **kwargs):
+	return create_mapping_rule(mapping=mapping, map_func=lambda f: f(map_func), extras=extras, defaults=defaults, **kwargs)
 
-
-class CommonCommandsRule(MappingRule):
-	mapping = aenea.configuration.make_grammar_commands('shared', {
-		'save' :                              Key('c-s'),
-		'open' :                              Key('c-o'),
-		'new' :                               Key('c-n'),
-		'new window' :                        Key('sc-n'),
-		'print' :                             Key('c-p'),
-	})
-
-
-
-class WindowsRule(MappingCountRule):
-	exported = False
-	mapping = aenea.configuration.make_grammar_commands('shared', windows_commands)
 
 
 class ScrollRule(MappingCountRule):
@@ -210,8 +232,8 @@ class ScrollRule(MappingCountRule):
 		# 'scone <nn>' :            Function(eye_tracker_phantom_mouse).bind({"action": Mouse('wheeldown:%(nn)d/30') * 3}),
 		# 'scup <nn>' :             Function(eye_tracker_phantom_mouse).bind({"action": Mouse('wheelup:%(nn)d/30') * 3}),
 		# '(I|eye) print position': Function(eye_tracker_print_position),
-		'scone <nn>' :            Mouse('wheeldown:%(nn)d/30') * 3,
-		'scup <nn>' :             Mouse('wheelup:%(nn)d/30') * 3,
+		'scone <nn>' :            DEFAULT_MOUSE('wheeldown:%(nn)d/30') * 3,
+		'scup <nn>' :             DEFAULT_MOUSE('wheelup:%(nn)d/30') * 3,
 	})
 
 
@@ -219,99 +241,64 @@ class MouseRule(MappingCountRule):
 	exported = False
 	mapping = aenea.configuration.make_grammar_commands('mouse', {
 		# '(I|eye) kick' :        Function(eye_tracker_phantom_mouse).bind({"action": Mouse('left')}),
-		'kick':                 Mouse('left'),
-		'rick':                 Mouse('right'),
-		'dub':                  Mouse('left:2'),
+		'kick':                 DEFAULT_MOUSE('left'),
+		'rick':                 DEFAULT_MOUSE('right'),
+		'dub':                  DEFAULT_MOUSE('left:2'),
 	})
 
 
-class SayRule(MappingRule):
-	mapping = aenea.configuration.make_grammar_commands('say', {
-		'say <text>': Text('%(text)s'),
-	})
-	extras = [DictateWords(name='text')]
+def FormatRule(mapping=format_mapping, map_func=DEFAULT_TEXT, extras=format_extras, **kwargs):
+	return create_mapping_rule(mapping=mapping, map_func=map_func, extras=extras, **kwargs)
 
 
-class FormatRule(CompoundRule):
-	exported = False
-	spec = ('[upper | natural | lower] ( constant | titan | camel | rel-path | abs-path | score | sentence | '
-		'scope-resolve | jumble | dotword | dashword | natword | snake | brooding-narrative) <dictation>')
-	extras = [DictateWords(name='dictation')]
-
-	def value(self, node):
-		words = node.words()
-
-		uppercase = words[0] == 'upper'
-		lowercase = words[0] == 'lower'
-		natural = words[0] == 'natural'
-
-		if not uppercase and not lowercase and not natural and words[0] == 'score':
-			lowercase = True
-
-		if words[0].lower() in ('upper', 'natural', 'lower'):
-			del words[0]
-
-		format_word = words[0].lower()
-		del words[0]
-
-		text_words = []
-		for w in words:
-			text_words += w.split('\\', 1)[0].split('-')
-
-		if lowercase:
-			text_words = [word.lower() for word in text_words]
-		if uppercase:
-			text_words = [word.upper() for word in text_words]
-
-		if format_word == 'constant':
-			format_word = 'score';
-			text_words = [word.upper() for word in text_words]
-
-		function = getattr(aenea.format, 'format_%s' % format_word)
-		formatted = function(text_words)
-
-		return Text(formatted)
-
-class SymbolAfterFormatRule(MappingCountRule):
-	exported = False
-	mapping = aenea.configuration.make_grammar_commands('shared', symbol_after_format_mapping)
+def SymbolAfterFormatRule(mapping=symbol_after_format_mapping, map_func=DEFAULT_KEY, **kwargs):
+	return create_mapping_rule(mapping=mapping, map_func=map_func, **kwargs)
 
 
-
-class ChainFormatRule(MappingRule):
-	def Execute(format_rule_before_symbol_rule, symbol_after_format_rule):
-		format_rule_before_symbol_rule.execute()
-		symbol_after_format_rule.execute()
+def DoubleRule(rule1, rule2):
+	def Execute(rule1, rule2):
+		rule1.execute()
+		rule2.execute()
 
 	mapping = {
-		'<format_rule_before_symbol_rule> <symbol_after_format_rule>': Function(Execute),
+		'<rule1> <rule2>': Function(Execute),
 	}
 
 	extras = [
-		RuleRef(name = 'format_rule_before_symbol_rule', rule = FormatRule(name = 'FormatRuleBeforeSymbolRule')),
-		RuleRef(name = 'symbol_after_format_rule', rule = SymbolAfterFormatRule()),
+		RuleRef(name='rule1', rule=rule1),
+		RuleRef(name='rule2', rule=rule2),
 	]
 
+	return MappingRule(exported=False, mapping=mapping, extras=extras)
 
-def CommonRepeatables():
-	return [
-		RuleRef(rule = NumberRule()),
-		RuleRef(rule = LetterRule()),
-		RuleRef(rule = SymbolRule()),
-		RuleRef(rule = CommonKeysRule()),
-		# RuleRef(rule = MouseRule()),
-		# RuleRef(rule = ChainFormatRule()),
-		# dictRule,
-	]
 
-def CommonFinishers():
-	return [
-		# RuleRef(rule = SayRule()),
-		RuleRef(rule = FormatRule()),
-		RuleRef(rule = WindowsRule(), name='windows'),
-		RuleRef(rule = ScrollRule()),
-		RuleRef(rule = SwapProgramRule()),
-	]
+def ChainFormatRule(format_rule=FormatRule, symbol_after_format_rule=SymbolAfterFormatRule):
+	return DoubleRule(format_rule(), symbol_after_format_rule())
+
+
+
+def create_rules(rules):
+	return [RuleRef(rule=r) for r in rules]
+
+common_repeatable_rules = [
+	NumberRule(),
+	LetterRule(),
+	SymbolRule(),
+	CommonKeysRule(),
+]
+
+common_finishers_rules = [
+	FormatRule(),
+	WindowsRule(),
+	ScrollRule(),
+	SwapProgramRule(),
+]
+
+def CommonRepeatables(repeatables=common_repeatable_rules):
+	return create_rules(repeatables)
+
+def CommonFinishers(finishers=common_finishers_rules):
+	return create_rules(finishers)
 
 class CommonRepeatRule(RepeatRule):
 	repeatables = CommonRepeatables()

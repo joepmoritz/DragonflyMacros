@@ -5,8 +5,9 @@ import aenea.configuration
 # from dragonfly import MappingRule, CompoundRule
 
 from dragonfly import *
+# from aenea.strict import *
 
-from util import DictInteger, DictateWords, MappingCountRule
+from util import *
 
 
 
@@ -313,7 +314,7 @@ class GitPullRule(CompoundRule):
 	extras = [pull_options]
 
 	def value(self, node):
-		return "pull " + recurse_values(node, [GitPullOption])
+		return "p " + recurse_values(node, [GitPullOption])
 pull_rule = RuleRef(name="pull_rule", rule=GitPullRule())
 
 
@@ -354,12 +355,17 @@ class GitRule(CompoundRule):
 merge_options = {
 	'verbose': '-v',
 }
-merge_option_rep = Repetition(Choice(choices = merge_options), name='merge_options', joinWith=' ', min=0, max=2)
+merge_option_rep = JoinList(Repetition(Choice(None, choices=merge_options), name='merge_options', min=0, max=2))
 
 merge_rule = Compound(
 	spec = "merge [<merge_options>]",
 	extras = [merge_option_rep],
 	value_func=lambda n, e: 'merge ' + e["merge_options"]
+	)
+
+fetch_rule = Compound(
+	spec = "fetch",
+	value_func=lambda n, e: 'fetch '
 	)
 
 rebase_options = {
@@ -369,7 +375,7 @@ rebase_options = {
 	'edit to do': '--edit-todo',
 	'interactive': '-i',
 }
-rebase_option_rep = Repetition(Choice(choices = rebase_options), name='rebase_options', joinWith=' ', min=0, max=2)
+rebase_option_rep = JoinList(Repetition(Choice(None, choices=rebase_options), name='rebase_options', min=0, max=2))
 
 rebase_rule = Compound(
 	spec = "rebase [<rebase_options>]",
@@ -386,6 +392,7 @@ clone_rule = Compound(
 
 git_commands = [
 	merge_rule,
+	fetch_rule,
 	rebase_rule,
 	clone_rule,
 ]

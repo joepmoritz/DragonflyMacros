@@ -48,9 +48,10 @@ print '\tSCREEN_RESOLUTION:', aenea.config.SCREEN_RESOLUTION
 
 # try:
 #     aenea.proxy_contexts._get_context()
-#     print 'Aenea: Successfully connected to server.'
-# except:
+#     print 'Aenea:    connected to server.'
+# except e:
 #     print 'Aenea: Unable to connect to server.'
+#     print e
 
 
 # Commands that can be rebound.
@@ -58,7 +59,7 @@ command_table = [
     'set proxy server to <proxy>',
     'disable proxy server',
     'enable proxy server',
-    'natlink reload'
+    'force natlink reload'
     ]
 command_table = aenea.configuration.make_grammar_commands(
     'aenea',
@@ -91,7 +92,8 @@ def reload_code():
     # Do not reload anything in these directories or their subdirectories.
     dir_reload_blacklist = set(["core"])
     macro_dir = aenea.config.STARTING_PROJECT_ROOT
-    # macro_dir = "C:\\NatLink\\NatLink\\DragonflyMacros"
+
+    print macro_dir
 
     # Unload all grammars.
     natlinkmain.unloadEverything()
@@ -109,7 +111,7 @@ def reload_code():
             path = topy(path)
 
             # Do not unimport this module!  This will cause major problems!
-            if (path.startswith(macro_dir) and
+            if (path.lower().startswith(macro_dir.lower() or name.startwith('aenea') or name.startwith('dragonfly')) and
                 not bool(set(path.split(os.path.sep)) & dir_reload_blacklist)
                 and path != topy(os.path.abspath(__file__))):
 
@@ -133,7 +135,7 @@ def reload_code():
 # also unloads all modules and packages in the macro directory so that they will
 # be reloaded the next time that they are imported.  It even reloads Aenea!
 class ReloadGrammarsRule(dragonfly.MappingRule):
-    mapping = {command_table['natlink reload']: dragonfly.Function(reload_code)}
+    mapping = {command_table['force natlink reload']: dragonfly.Function(reload_code)}
 
 server_list = dragonfly.DictList('aenea servers')
 server_list_watcher = aenea.configuration.ConfigWatcher(

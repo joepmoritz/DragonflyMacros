@@ -1,0 +1,13 @@
+[{
+    "name": "new_pruning",
+    "tags": ["sublime"],
+    "window_titles": ["— new_pruning"],
+    "vocabulary": {
+        "run build": "{{w-2/5}}./build.sh | less{{enter}}",
+        "run localize": "{{w-2/5}}./localize.sh{{enter}}",
+        "run compare": "{{w-2/5}}./compare.sh{{enter}}",
+        "run prune": "{{w-2/5}}./prune.sh{{enter}}"
+    },
+    "shortcuts": {
+    }
+}]

@@ -1,0 +1,26 @@
+[{
+    "name": "Lua",
+    "tags": ["keywords", "lua_file"],
+    "vocabulary": {
+        "true": "true",
+        "false": "false",
+        "not": "not",
+        "return": "return",
+        "function": "function()",
+        "end": "end",
+        "nil": "nil"
+    }
+},
+{
+    "name": "Lua",
+    "tags": ["functions", "lua_file"],
+    "vocabulary": {
+        "func print": "print"
+    }
+},
+{
+    "name": "Lua",
+    "tags": ["sublime", "lua_file"],
+    "vocabulary": {
+    }
+}]

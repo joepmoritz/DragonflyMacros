@@ -1,53 +1,195 @@
 desktop_names = {
-	'home': 2,
+	'home': 1,
 	'script': 1,
-	'work': 3,
-	'bart': 4,
+	'work': 1,
+	'bart': 1,
 }
 
-common_folders = {
-	'my documents': '/mnt/d/MyDocuments',
-	'downloads': '/mnt/d/Joep/Downloads',
-	'Google Drive': '/mnt/c/Users/Joep/Google\ Drive',
-	'Dropbox': '/mnt/c/Users/Joep/Dropbox',
-	'program files': '/mnt/c/Program\ Files',
-	'midnight commander': '/mnt/d/MyDocuments/MidnightCommander',
-	'speech coding': '/mnt/d/MyDocuments/SpeechCoding',
+sublime_projects = [
+	{
+		'speech': 'lime speech',
+		'project_name': 'SpeechCoding',
+		# 'project_file_path': '/Users/joepmoritz/Projects/Personal/SpeechCoding.sublime-project',
+		# 'desktop_name': 'script',
+	},
+	{
+		'speech': 'lime auto hotkey',
+		'project_name': 'AutoHotkey',
+		# 'project_file_path': '/Users/joepmoritz/Projects/Personal/SpeechCoding.sublime-project',
+		# 'desktop_name': 'script',
+	},
+	{
+		'speech': 'lime clever',
+		'project_name': 'CleverCoder',
+		# 'project_file_path': '/Users/joepmoritz/Projects/Personal/CleverCoder.sublime-project',
+		# 'desktop_name': 'script',
+	},
+	{
+		'speech': 'lime settings',
+		'project_name': 'my-sublime-settings',
+		# 'desktop_name': 'script',
+	},
+	{
+		'speech': '[lime] click by voice',
+		'project_name': 'click-by-voice',
+		'project_file_path': '/Users/joepmoritz/Projects/Personal/click-by-voice.sublime-project',
+		# 'desktop_name': 'script',
+	},
+	{
+		'speech': 'lime dot files',
+		'project_name': 'dotfiles',
+		# 'desktop_name': 'script',
+	},
+	{
+		'speech': 'lime pro man',
+		'project_name': 'ProjectManager',
+		# 'desktop_name': 'script',
+	},
+	{
+		'speech': 'lime ace jump',
+		'project_name': 'ace-jump-sublime',
+		# 'desktop_name': 'script',
+	},
+	{
+		'speech': 'lime file browser',
+		'project_name': 'SublimeFileBrowser',
+		# 'desktop_name': 'script',
+	},
+	{
+		'speech': 'lime terminus',
+		'project_name': 'Terminus',
+		# 'desktop_name': 'script',
+	},
+	{
+		'speech': 'lime Dragon words',
+		'project_name': 'DragonWords',
+		# 'desktop_name': 'script',
+	},
+	{
+		'speech': 'lime local',
+		'project_name': 'localisation',
+		# 'desktop_name': 'work',
+	},
+	{
+		'speech': 'lime recon',
+		'project_name': 'reconstruction',
+		# 'desktop_name': 'work',
+	},
+	{
+		'speech': 'lime SnapCV',
+		'project_name': 'SnapCV',
+		# 'desktop_name': 'work',
+	},
+	{
+		'speech': 'lime new pruning',
+		'project_name': 'new_pruning',
+		# 'desktop_name': 'work',
+	},
+	{
+		'speech': 'lime chunk merging',
+		'project_name': 'chunk_merging',
+		# 'desktop_name': 'work',
+	},
+	{
+		'speech': 'lime lut hack',
+		'project_name': 'lut_hack',
+		# 'desktop_name': 'work',
+	},
+	{
+		'speech': 'lime multi seed',
+		'project_name': 'multi_seed',
+		# 'desktop_name': 'work',
+	},
+	# {
+	# 	'speech': '[lime] terminals',
+	# 	'project_name': 'Terminals',
+	# 	# 'desktop_name': 'work',
+	# },
+]
 
-	'skin': '/mnt/d/MyDocuments/Skin',
-	'make tileable': '/mnt/d/MyDocuments/Skin/MakeTileable',
-	'matlab utils': '/mnt/d/MyDocuments/Skin/MatlabUtils',
-	# 'height field renders': '/mnt/d/MyDocuments/Skin/HeightfieldRenders',
-	'data': '/mnt/d/MyDocuments/Skin/Data',
-	'results': '/mnt/d/MyDocuments/Skin/Results',
-	'PS gan': '/mnt/d/MyDocuments/Skin/psgan',
+common_folders = [
+	{
+		'speech': 'personal',
+		'jump_point': 'Personal',
+		'path': '~/Personal',
+	},
+	{
+		'speech': 'downloads',
+		'jump_point': 'Downloads',
+		'path': '~/Downloads',
+	},
+	{
+		'speech': 'world AR',
+		'path': '~/Projects/WorldAR',
+		'desktop_name': 'work',
+	},
+	{
+		'speech': 'videos',
+		'path': '~/Projects/WorldAR/videos/carnaby-street',
+		'desktop_name': 'work',
+	},
+	{
+		'speech': 'SnapCV',
+		'path': '~/Projects/WorldAR/SnapCV',
+		'desktop_name': 'work',
+	},
+	{
+		'speech': 'LensCore',
+		'path': '~/Projects/WorldAR/LensCore',
+		'desktop_name': 'work',
+	},
+	{
+		'speech': '(recon | reconstruction) native',
+		'path': '~/Projects/WorldAR/reconstruction_native',
+		'desktop_name': 'work',
+	},
+	{
+		'speech': 'cloud [recon]',
+		'path': '~/Projects/WorldAR/cloud_reconstruction',
+		'desktop_name': 'work',
+	},
+	{
+		'speech': '(recon | reconstruction)',
+		'path': '~/Projects/WorldAR/reconstruction',
+		'desktop_name': 'work',
+	},
+	{
+		'speech': 'det eval',
+		'path': '~/Projects/WorldAR/detector_evaluation',
+		'desktop_name': 'work',
+	},
+	{
+		'speech': 'new pruning',
+		'path': '~/Projects/WorldAR/new_pruning',
+		'desktop_name': 'work',
+	},
+	{
+		'speech': 'chunk merging',
+		'path': '~/Projects/WorldAR/chunk_merging',
+		'desktop_name': 'work',
+	},
+	{
+		'speech': 'lut hack',
+		'path': '~/Projects/WorldAR/lut_hack',
+		'desktop_name': 'work',
+	},
+	{
+		'speech': 'multi seed',
+		'path': '~/Projects/WorldAR/multi_seed',
+		'desktop_name': 'work',
+	},
+	{
+		'speech': 'Google Drive',
+		'jump_point': 'Google Drive',
+		'path': '/Users/joepmoritz/Google Drive',
+		'desktop_name': 'work',
+	}
+]
 
-	'job hunting': '/mnt/c/Users/Joep/Google\ Drive/Job\ hunting',
-	'click by voice': '/mnt/c/Users/Joep/Google\ Drive/click-by-voice',
-	'scripts and settings': '/mnt/c/Users/Joep/Google\ Drive/ScriptsAndSettings',
+for cf in common_folders:
+	cf['path_win'] = cf['path'].replace('~', 'Z:')
 
-	# 'meeting2docs': '/mnt/d/MyDocuments/Meeting2Docs',
-	# 'firebase functions': '/mnt/d/MyDocuments/Meeting2Docs/firebase/functions',
-	# 'firebase': '/mnt/d/MyDocuments/Meeting2Docs/firebase',
-}
 
-folder_desktops = {
-	'midnight commander': desktop_names['script'],
-	'speech coding': desktop_names['script'],
-
-	'Dropbox': desktop_names['work'],
-	'skin': desktop_names['work'],
-	'make tileable': desktop_names['work'],
-	'matlab utils': desktop_names['work'],
-	'height field renders': desktop_names['work'],
-	'data': desktop_names['work'],
-	'results': desktop_names['work'],
-	'PS gan': desktop_names['work'],
-
-	'meeting2docs': desktop_names['bart'],
-	'firebase functions': desktop_names['bart'],
-	'firebase': desktop_names['bart'],
-}
 
 common_websites = {
 	'maps':       'https://www.google.co.uk/maps',

@@ -3,20 +3,25 @@ from dragonfly.grammar.elements import Empty
 
 class NoCompile(Empty):
 
-	def __init__(self, child, name=None, default=None):
-		Empty.__init__(self, name, value = True, default=default)
-
+	def __init__(self, child, name=None):
 		self._child = child
+		Empty.__init__(self, name=name)
 
 
 	def dependencies(self, memo):
-		if self in memo:
+		if self._id in memo:
 			return []
-		memo.append(self)
+		memo.add(self._id)
 		return self._child.dependencies(memo)
 
+
+	def compile(self, compiler):
+		pass
+
+
 	def gstring(self):
-		return "[[" + self._child.gstring() + "]]"
+		return "<NoCompile(" + self._child.gstring() + ")>"
+
 
 	def decode(self, state):
 		# print "NoCompile.decode"
@@ -31,6 +36,7 @@ class NoCompile(Empty):
 		# The rule failed to deliver a valid decoding, failure.
 		state.decode_failure(self)
 		return
+
 
 	def value(self, node):
 		# print "NoCompile.value %s" % node.children[0].value()

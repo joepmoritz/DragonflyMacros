@@ -4,6 +4,7 @@ import aenea.misc
 import aenea.vocabulary
 
 from dragonfly import *
+# from aenea.strict import *
 
 from SharedTerminalRules import *
 from util import *
@@ -11,34 +12,36 @@ from SharedRules import *
 from SwapProgram import SwapProgramRule
 from SharedGitRules import GitRule, GitRuleNew
 
-midnight_commander_context = AppContext(executable='ConEmu64.exe', title = 'mc - ')
-other_terminal_context = TerminalContext() & ~midnight_commander_context
-terminal_grammar = Grammar('terminal', context=other_terminal_context)
+terminal_context = TerminalContext()
+terminal_grammar = Grammar('terminal', context=terminal_context)
 
 
 
-list_choices = {'all': '-a', 'long': '-l'}
+list_choices = {'all': '-a', 'long': '-l', 'latest': '-tr'}
 
 
 class OtherTerminalRepeatablesRule(MappingRule):
     exported = False
     mapping = aenea.configuration.make_grammar_commands('terminal', {
-        'list [<ls_opt>]':                   Text('ls %(ls_opt)s') + Key('enter'),
-        'dear':                        Text('cd '),
-        'punk <nn>':                         Text('cd ..\n') * Repeat(extra = "nn"),
+        # 'list [<ls_opt>]':                   Text('l %(ls_opt)s') + Key('enter'),
+        '[long] list': Key('l,enter'),
+        'quick list': Key('l,s,enter'),
+        # 'dear':                        Text('cd '),
+        'punk <nn>':                         Key('dot,dot:%(nn)d,enter'),
         'dodo <nn>':                         Text('../') * Repeat(extra = "nn"),
-        'stab':        Key('tab,enter'),
+        # 'stab':        Key('tab,enter'),
         'break':      Key('c-c'),
-        '<terminal_words>': Text(' %(terminal_words)s', pause = 0),
+        # '<terminal_words>': Text('%(terminal_words)s', pause = 0),
 
         'move': Text('mv '),
         'M V': Text('mv '),
-        'make dear': Text('mkdir '),
-        'M K dear': Text('mkdir '),
-        'remove': Text('rm '),
+        'make dear': Text('mkd '),
+        'M K dear': Text('mkd '),
         'remove recurse': Text('rm -rf '),
         'remove dear': Text('rmdir '),
+        'remove': Text('rm '),
         'make link': Text('ln -s '),
+        'symlink': Text('ln -s '),
         'C H own': Text('chown '),
         'change owner': Text('chown '),
         'C H group': Text('chgrp '),
@@ -46,25 +49,25 @@ class OtherTerminalRepeatablesRule(MappingRule):
         'C H mod': Text('chmod '),
         'change mod': Text('chmod '),
 
+        'create branch [<dash_word_text>]': Text('g go jm/%(dash_word_text)s'),
+        'show commit <nn>': Text('gsi %(nn)d'),
     })
 
     extras = [
-        Repetition(Choice(choices = list_choices), name='ls_opt', joinWith=' ', min=0, max=2),
+        JoinList(Repetition(Choice(None, choices = list_choices), name='ls_opt', min=0, max=2)),
         NoCompile(Optional(Integer(min = 1, max = 100), default = 1), name = 'nn'),
-        Choice(name = 'terminal_words', choices = common_terminal_words),
+        Choice(name='terminal_words', choices=common_terminal_words),
+        Dictation(name='dash_word_text').lower().replace(" ", "-"),
     ]
-    defaults = {'nn': 1}
+    defaults = {'nn': 1, 'dash_word_text': ''}
 
 
 
 
 class OtherTerminalFinishersRule(MappingCountRule):
     exported = False
-    mapping = aenea.configuration.make_grammar_commands('midnight_commander', {
-        # 'mid com': Text('mc\n'),
-        # 'SSH jingyi': Text('ssh joep@jingyi') + Key('enter/50') + Text('source activate py27\ncd psgan\n'),
+    mapping = aenea.configuration.make_grammar_commands('terminal_finishers', {
         'sublime here': Text('subl.exe .\n'),
-        # 'sync spatial gan': Key('w-1/10') + Text('rsync -av /mnt/d/MyDocuments/Skin/special_gan joep@jingyi:~/\n', pause = 0),
     })
 
 
@@ -72,26 +75,22 @@ class TerminalRule(RepeatRule):
     repeatables = [
         RuleRef(rule=TerminalRepeatablesRule()),
         RuleRef(rule= OtherTerminalRepeatablesRule()),
-        DictListRef('dynamic terminal', aenea.vocabulary.register_dynamic_vocabulary('terminal')),
-        RuleRef(rule = GitRule()),
-        RuleRef(rule = GitRuleNew()),
+        DictListRef('dynamic terminal', aenea.vocabulary.register_dynamic_vocabulary('terminal_repeaters')),
+        # RuleRef(rule = GitRule()),
+        # RuleRef(rule = GitRuleNew()),
         RuleRef(rule = ChainFormatRule()),
     ] + CommonRepeatables()
     finishers = [
+        DictListRef('dynamic terminal', aenea.vocabulary.register_dynamic_vocabulary('terminal_finishers')),
         RuleRef(rule=OtherTerminalFinishersRule()),
-        RuleRef(rule=TerminalWindowsCommandsRule()),
-        RuleRef(rule=TerminalFinishersRule()),
-        RuleRef(rule =TerminalQuickFinishersRule()),
-        RuleRef(rule = FormatRule()),
-        RuleRef(rule = ScrollRule()),
-        RuleRef(rule = SwapProgramRule()),
-    ]
+        # RuleRef(rule=TerminalFinishersRule()),
+        # RuleRef(rule=TerminalQuickFinishersRule()),
+    ] + CommonFinishers()
 
 
 terminal_grammar.add_rule(TerminalRule())
 terminal_grammar.load()
 
-aenea.vocabulary.add_window_executable_tag('ConEmu64.exe', 'terminal')
 
 
 def unload():

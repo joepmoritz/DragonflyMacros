@@ -3,6 +3,11 @@
     "tags": ["sublime", "python_file"],
     "vocabulary": {
         "self":              "self",
+        "arguments": "args",
+        "key word arguments":     "**kwargs",
+        "OS separator": "os.sep",
+        "folder separator": "os.sep",
+        "met make dear":          ".mkdir(parents=True, exist_ok=True)",
         "import numpy":      "import numpy as np",
         "import pandas":     "import pandas as pd",
         "import print":      "from pprint import pprint as pp",

@@ -1,0 +1,33 @@
+{
+    "name": "Slack",
+    "tags": ["global_stuff", "window_executable_slack"],
+    "vocabulary": {
+        "channel 3d markers-tech": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["3d-markers-tech"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "channel 3d vision": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["3d-vision"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "channel stand-up": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["cp-london-standup"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "channel can tracker": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["can-tracker"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "channel cam plat london": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["camplat-london"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "channel cam plat london ml": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["camplat-london-ml"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "channel cam plat london vision": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["camplat-london-vision"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "channel uk il": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["camplat-uk-il"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "channel cloud recon": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["cloud-recon"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "channel colocated collaborative AR": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["colocated-collaborative-ar"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "channel reading group": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["reading-group"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "channel reconstruction dev": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["reconstruction-dev"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "channel tech lounge": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["techlounge"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "channel world craft": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["worldcraft"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "message Andrew": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["aspek"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "message David": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["dmccabe"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "message Ed": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["erosten"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "message Qi": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["qi.pan"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "message maria": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["mgarciasopo"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "message olly": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["oliver.woodford"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "message rich": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["rmccormack"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}],
+        "message yan li": [{"type": "Key", "args": ["w-k"]}, {"type": "Text", "args": ["yzhao2"]}, {"type": "Pause", "args": ["10"]}, {"type": "Key", "args": ["enter"]}]
+    },
+    "shortcuts": {
+        "threads": "ws-t",
+        "back": "w-rbracket",
+        "forward": "w-lbracket"
+    }
+}

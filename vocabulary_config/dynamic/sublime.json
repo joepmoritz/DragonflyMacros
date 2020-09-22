@@ -1,0 +1,13 @@
+{
+    "name": "Sublime",
+    "tags": ["sublime"],
+    "vocabulary": {
+    },
+    "shortcuts": {
+        "smaller equal": "ac-comma,ac-s",
+        "greater equal": "ac-comma,ac-g",
+        "smaller than": "ac-dot,ac-s",
+        "less than": "ac-dot,ac-s",
+        "greater than": "ac-dot,ac-g"
+    }
+}

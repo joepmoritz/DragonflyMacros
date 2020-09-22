@@ -2,66 +2,81 @@ import aenea.config
 import aenea.configuration
 
 from dragonfly import *
+# from aenea.strict import *
+# from aenea.proxy_contexts import *
+from dragonfly import Key as DragonKey, Text as DragonText
 
 from SharedChromeRules import SharedChromeRepeatablesRule, SharedChromeFinishersRule
-from SharedRules import MappingCountRule, RepeatRule, CommonRepeatables, CommonFinishers
+from SharedRules import *
 
 
-inbox_context = AppContext(executable='Chrome', title='joep.moritz@gmail.com')
-inbox_grammar = Grammar('chrome', context=inbox_context)
+# chrome_context = ProxyAppContext(executable='WinAppHelper') & AppContext(executable='chrome.exe')
+chrome_context = AppContext(executable='chrome')
+inbox_context = chrome_context & (AppContext(title='joep.moritz@gmail.com') | AppContext(title='jmoritz@snapchat.com'))
+inbox_grammar = Grammar('gmail', context=inbox_context)
 inbox_tags = ['inbox']
 
 
 class InboxRepeatablesRule(MappingCountRule):
-    mapping = aenea.configuration.make_grammar_commands('chrome', {
-        'next [item] <nn>': Key('right:%(nn)d'),
-        'pre [item] <nn>': Key('left:%(nn)d'),
-        'next mess <nn>': Key('n:%(nn)d'),
-        'pre mess <nn>': Key('p:%(nn)d'),
-        # 'undo': Key('z'),
-        'open': Key('o'),
-        'close': Key('u'),
-        'serk': Key('slash'),
-        'done': Key('y'),
-        'compose': Key('c'),
-        'add reminder': Key('t'),
-        'spam': Key('exclamation'),
-        # 'send': Key('up,c-enter'),
-        'trash': Key('hash'),
-        'mark': Key('x'),
-        'finish cheers': Text('\n\nCheers,\nJoep'),
-        'finish thanks': Text('\n\nThanks,\nJoep'),
-        'finish best': Text('\n\nBest,\nJoep'),
-        'finish kind regards': Text('\n\nKind regards,\nJoep Moritz'),
-    })
+    mapping = {
+        'next [item] <nn>': DragonKey('right:%(nn)d'),
+        'pre [item] <nn>': DragonKey('left:%(nn)d'),
+        'next mess <nn>': DragonKey('n:%(nn)d'),
+        'pre mess <nn>': DragonKey('p:%(nn)d'),
+        # 'undo': DragonKey('z'),
+        'open': DragonKey('o'),
+        'close': DragonKey('u'),
+        'surf': DragonKey('slash'),
+        'done | archive': DragonKey('e'),
+        'compose': DragonKey('c'),
+        'add reminder': DragonKey('t'),
+        'spam': DragonKey('exclamation'),
+        'send': DragonKey('c-enter'),
+        'trash': DragonKey('hash'),
+        'mark <nn>': DragonKey('x/20,down') * Repeat(extra = "nn"),
+        'finish cheers': DragonText('\r\rCheers,\rJoep'),
+        'finish thanks': DragonText('\r\rThanks,\rJoep'),
+        'finish best': DragonText('\r\rBest,\rJoep'),
+        'finish kind regards': DragonText('\r\rKind regards,\rJoep Moritz'),
+    }
 
 
 class InboxFinishersRule(MappingRule):
-    mapping = aenea.configuration.make_grammar_commands('chrome', {
-        'inbox': Key('i'),
-        'reply all': Key('s-a'),
-        'reply': Key('s-r'),
-        'forward': Key('f'),
-        'move to': Key('dot'),
-        'bold that': Key('c-b'),
-        'italics that': Key('c-i'),
-        'underline that': Key('c-u'),
-        '(hyperlink that | insert hyperlink)': Key('c-k'),
-        'numbered list': Key('c-7'),
-        'bulleted list': Key('c-8'),
-        'remove formatting': Key('c-backslash'),
-    })
+    mapping = {
+        'inbox': DragonKey('g,i'),
+        'reply all': DragonKey('a'),
+        'reply': DragonKey('r'),
+        'forward': DragonKey('f'),
+        'move to': DragonKey('dot'),
+        'bold that': DragonKey('w-b'),
+        'italics that': DragonKey('w-i'),
+        'underline that': DragonKey('w-u'),
+        'indent': DragonKey('w-['),
+        'unindent': DragonKey('w-]'),
+        '(hyperlink that | insert hyperlink)': DragonKey('w-k'),
+        'numbered list': DragonKey('w-7'),
+        'bulleted list': DragonKey('w-8'),
+        'remove formatting': DragonKey('w-backslash'),
+    }
 
 
 class InboxRule(RepeatRule):
     repeatables = [
         RuleRef(rule=InboxRepeatablesRule()),
         RuleRef(rule=SharedChromeRepeatablesRule()),
-    ] + CommonRepeatables()
+        RuleRef(rule=NumberRule(map_func=DragonKey)),
+        RuleRef(rule=LetterRule(map_func=DragonKey)),
+        RuleRef(rule=SymbolRule(map_func=DragonKey)),
+        RuleRef(rule=CommonKeysRule(map_func=DragonKey)),
+    ]
 
-    finishers = CommonFinishers() + [
+    finishers = [
         RuleRef(rule=InboxFinishersRule()),
         RuleRef(rule=SharedChromeFinishersRule()),
+        RuleRef(rule=FormatRule(map_func=DragonText)),
+        RuleRef(rule=WindowsRule(map_func=DragonKey)),
+        RuleRef(rule=ScrollRule()),
+        RuleRef(rule=SwapProgramRule()),
     ]
 
 

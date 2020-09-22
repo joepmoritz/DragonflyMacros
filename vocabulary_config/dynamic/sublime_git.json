@@ -1,0 +1,83 @@
+[
+{
+    "name": "sublime_git1",
+    "tags": ["sublime"],
+    "window_titles": ["*git-status*"],
+    "vocabulary": {
+    },
+    "shortcuts": {
+
+    }
+},
+{
+    "name": "sublime_git2",
+    "tags": ["sublime_multiples"],
+    "window_titles": ["*git-status*"],
+    "vocabulary": {
+    },
+    "shortcuts": {
+        "stage file": "s",
+        "unstage file": "u"
+    }
+},
+{
+    "name": "sublime_git3",
+    "tags": ["sublime_finishers"],
+    "window_titles": ["*git-status*"],
+    "vocabulary": {
+    },
+    "shortcuts": {
+        "open": "enter",
+        "diff": "d",
+        "ignore file": "i",
+        "ignore pattern": "s-i",
+        "discard": "backspace",
+        "stage all": "cs-s",
+        "unstage all": "s-u",
+        "create stash": "z",
+        "create stash with untracked": "s-z",
+        "apply stash": "a",
+        "pop stash": "s-a",
+        "go to untracked": "1",
+        "go to changes": "2",
+        "go to unstaged": "2",
+        "go to staged": "3",
+        "commit": "c",
+        "commit amend": "cs-c",
+        "refresh": "r"
+    }
+},
+{
+    "name": "sublime_git4",
+    "tags": ["sublime_finishers"],
+    "window_titles": ["*git-diff*"],
+    "vocabulary": {
+    },
+    "shortcuts": {
+        "next hunk": "n",
+        "pre hunk": "p",
+        "next file": "s-n",
+        "pre file": "s-p",
+        "more context": "plus",
+        "less context": "minus",
+        "stage hunk": "s",
+        "unstage hunk": "u"
+    }
+},
+{
+    "name": "sublime_git5",
+    "tags": ["DISABLED_sublime_finishers"],
+    "vocabulary": {
+    },
+    "shortcuts": {
+        "git log": "ca-g,ca-l",
+        "git status": "ca-g,ca-s",
+        "git diff": "ca-g,c-d",
+        "git diff cached": "ca-g,cs-d",
+        "git diff file": "ca-g,ca-d",
+        "git diff file cached": "ca-g,cas-d",
+        "git commit": "ca-g,ca-c",
+        "git commit amend": "ca-g,ca-a"
+    }
+}
+]

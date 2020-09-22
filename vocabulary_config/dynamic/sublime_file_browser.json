@@ -1,0 +1,58 @@
+[
+{
+    "name": "sublime_file_browser1",
+    "tags": ["sublime", "sublime_file_browser"],
+    "vocabulary": {
+    },
+    "shortcuts": {
+        "copy file name": "sc-c,f",
+        "copy file directory": "sc-c,d",
+        "copy file path": "sc-c,p",
+        "rename": "s-r",
+        "new folder": "c,d",
+        "make folder": "c,d",
+        "new file": "c,f",
+        "jump point": "s-p",
+        "add folder to project": "f",
+        "invert marks": "t",
+        "unmark all": "u",
+        "mark by extension": "star"
+    }
+},
+{
+    "name": "sublime_file_browser2",
+    "tags": ["sublime_multiples", "sublime_file_browser"],
+    "vocabulary": {
+    },
+    "shortcuts": {
+        "trash": "s-d",
+        "kill": "as-d",
+        "mark": "m",
+        "punk": "backspace"
+    }
+},
+{
+    "name": "sublime_file_browser3",
+    "tags": ["sublime_finishers", "sublime_file_browser"],
+    "vocabulary": {
+    },
+    "shortcuts": {
+        "terminal here": "sc-c,d,ca-t/100,c,d,space,dquote,cs-v,dquote,enter",
+        "open": "space",
+        "open in lime": "enter",
+        "open in Finder": "backslash",
+        "open in new window": "s-w",
+        "open all marked": "w-enter"
+    }
+},
+{
+    "name": "sublime_file_browser4",
+    "tags": ["sublime_finishers"],
+    "vocabulary": {
+    },
+    "shortcuts": {
+        "browse project": "c-m,c-p",
+        "browse file": "c-m,c-f"
+    }
+}
+]
