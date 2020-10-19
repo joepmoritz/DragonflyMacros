@@ -52,6 +52,14 @@ sublime_short_snippets['braces'] = 'lbrace'
 sublime_short_snippets['brackets'] = 'lbracket'
 sublime_short_snippets['angles'] = 'ac-dot,langle'
 
+sublime_symbols = SYMBOLS.copy()
+sublime_symbols['single smote'] = 'ac-dot,squote'
+sublime_symbols['single quote'] = 'ac-dot,dquote'
+sublime_symbols['left pax'] = 'ac-dot,lparen'
+sublime_symbols['left brace'] = 'ac-dot,lbrace'
+sublime_symbols['left bracket'] = 'ac-dot,lbracket'
+
+
 sublime_character_mapping = CHARACTERS.copy()
 sublime_character_mapping['smote'] = 'squote'
 sublime_character_mapping['quote'] = 'dquote'
@@ -273,7 +281,7 @@ class SublimeRepeatRule(RepeatRule):
         keyword_rule,
         function_rule,
         RuleRef(rule=EditActionsRule()),
-        RuleRef(rule=SymbolRule()),
+        RuleRef(rule=SymbolRule(mapping=sublime_symbols)),
         RuleRef(rule=ShortSnippetsRule(mapping=sublime_short_snippets)),
         RuleRef(rule=SmallSnippetsRule()),
         RuleRef(rule=LetterRule()),
