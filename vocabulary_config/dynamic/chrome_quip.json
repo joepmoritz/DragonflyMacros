@@ -1,0 +1,15 @@
+{
+    "name": "Quip",
+    "tags": ["quip", "other_chrome_finishers"],
+    "vocabulary": {
+    },
+    "shortcuts": {
+        "new document": "ca-n",
+        "code block": "ca-k",
+        "bullet list": "cs-l",
+        "numbered list": "cs-7",
+        "large heading": "ca-1",
+        "medium heading": "ca-2",
+        "small heading": "ca-3"
+    }
+}

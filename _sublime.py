@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 import aenea.config
 import aenea.configuration
-import aenea.misc
 import aenea.vocabulary
 
 from dragonfly import *
 # from aenea.strict import *
 # from aenea.proxy_contexts import *
 
+from letters import CHARACTERS, SHORT_SNIPPETS
 from util import *
+from util.DigitalInteger import DigitalInteger
 from SharedRules import *
 from SwapProgram import SwapProgramRule
 from SharedTerminalRules import TerminalContext
@@ -43,15 +44,15 @@ sublime_common_keys_mapping['sewolipe <nn>'] = SwitchKey('sc-right:%(nn)d')
 sublime_common_keys_mapping['sesubloof <nn>'] = SwitchKey('sa-left:%(nn)d')
 sublime_common_keys_mapping['sesublipe <nn>'] = SwitchKey('sa-right:%(nn)d')
 
-sublime_symbol_mapping = symbol_mapping.copy()
-sublime_symbol_mapping['smote'] = 'squote'
-sublime_symbol_mapping['quote'] = 'dquote'
-sublime_symbol_mapping['pax'] = 'lparen'
-sublime_symbol_mapping['braces'] = 'lbrace'
-sublime_symbol_mapping['brackets'] = 'lbracket'
-sublime_symbol_mapping['angles'] = 'ac-dot,langle'
+sublime_short_snippets = SHORT_SNIPPETS.copy()
+sublime_short_snippets['smote'] = 'squote'
+sublime_short_snippets['quote'] = 'dquote'
+sublime_short_snippets['pax'] = 'lparen'
+sublime_short_snippets['braces'] = 'lbrace'
+sublime_short_snippets['brackets'] = 'lbracket'
+sublime_short_snippets['angles'] = 'ac-dot,langle'
 
-sublime_character_mapping = aenea.misc.CHARACTERS.copy()
+sublime_character_mapping = CHARACTERS.copy()
 sublime_character_mapping['smote'] = 'squote'
 sublime_character_mapping['quote'] = 'dquote'
 sublime_character_mapping['pax'] = 'lparen'
@@ -59,18 +60,25 @@ sublime_character_mapping['braces'] = 'lbrace'
 sublime_character_mapping['brackets'] = 'lbracket'
 sublime_character_mapping['angles'] = 'langle'
 
+char_mapping_choice = RuleWrap('', Choice('', sublime_character_mapping))
 
-class CharacterRule(MappingRule):
-    name = "Character mapping"
-    exported = False
-    mapping = sublime_character_mapping
+extra_n5 = ShortIntegerRef(name='n5', min=0, max=5, default=1)
+extra_n = ShortIntegerRef(name='n', min=0, max=9, default=1)
+extra_nn = ShortIntegerRef(name='nn', min=0, max=99, default=1)
+extra_bign = RuleWrap('bign', DigitalInteger('bign', min=1, max=6), default=1)
+
+extras = [
+    RuleRef(extra_n5.rule, "n5"),
+    RuleRef(extra_n.rule, "n"),
+    RuleRef(extra_nn.rule, "nn"),
+    RuleRef(extra_bign.rule, "bign"),
+    DictateWords(name='text'),
+    RuleRef(char_mapping_choice.rule, 'char'),
+]
+
+defaults = {'n': 1, 'nn': 1, 'n5': 1, 'bign': 1, 'text': '', 'char': ''}
 
 
-class PriorityFinishersRule(MappingCountRule):
-    exported = False
-    mapping = {
-        # 'open project [<text>]': Key('cs-n/5,w-up/2,a-p/2,s') + Text('%(text)s'),
-    }
 
 def Jeep(char, force_word_start=False):
     if char in string.ascii_lowercase or force_word_start:
@@ -91,7 +99,7 @@ class FinisherRule(MappingRule):
         'jeep <char>':           Function(Jeep),
         'seep <char>':           Key('wc-squote') + Function(Jeep),
         'keep <char>':           Key('wcs-squote') + Function(Jeep),
-        'go to line <n>':        Key('c-g') + Text('%(n)d'),
+        'go to line <bign>':     Key('c-g') + Text('%(bign)d'),
         'go to line':            Key('c-g'),
         'definition | deafy':    Key('f12'),
         'references | revel':    Key('s-f12'),
@@ -106,9 +114,9 @@ class FinisherRule(MappingRule):
         'toggle wordwrap':       Key('csa-w'),
         'twink clove':           Key('c-pgup,c-w'),
         'trip clove':            Key('c-pgdown,c-w'),
-        'teepee <n>':            Key('a-%(n)d'), # w-
-        'twink [<n>]':           Key('c-pgup:%(n)d'),
-        'trip [<n>]':            Key('c-pgdown:%(n)d'),
+        'teepee <nn>':           Key('a-%(nn)d'), # w-
+        'twink [<nn>]':          Key('c-pgup:%(nn)d'),
+        'trip [<nn>]':           Key('c-pgdown:%(nn)d'),
         '[go | next] mark':      Key('f2'),
         'pre mark':              Key('s-f2'),
         'split [into] lines':    Key('cs-l'),
@@ -121,7 +129,7 @@ class FinisherRule(MappingRule):
         'unfold all':            Key('c-k,c-j'),
         'fold this':             Key('sc-lbracket,home'),
         'unfold this':           Key('sc-rbracket,left'),
-        'fold <small_n>':        Key('c-k,c-%(small_n)d'),
+        'fold [<n5>]':           Key('c-k,c-%(n5)d'),
         'rename file':           Key('cs-p,r,f,enter'),
         'flip file':             Key('ca-up'),
         'new project':           Key('cs-p/3,p/3,m/3,space/3,a/3,d/3,d/3,enter'),
@@ -134,14 +142,8 @@ class FinisherRule(MappingRule):
         'auto pep 8':            Key('sc-8'),
     })
 
-    extras = [
-        IntegerRef(min=1, max=5, name='small_n'),
-        ShortIntegerRef(name='n', min=0, max=10000),
-        DictateWords(name='text'),
-        RuleRef(name='char', rule=CharacterRule()),
-    ]
-
-    defaults = {'n': 1, 'nn': 1}
+    extras = extras
+    defaults = defaults
 
 
 class SmallSnippetsRule(MappingRule):
@@ -162,7 +164,7 @@ class SmallSnippetsRule(MappingRule):
         }, 'small_snippets1')
 
 
-class EditActionsRule(MappingCountRule):
+class EditActionsRule(MappingRule):
     exported = False
     mapping = aenea.configuration.make_grammar_commands('sublime', {
         'clove':                                    Key('c-w'), # w-w
@@ -176,35 +178,35 @@ class EditActionsRule(MappingCountRule):
         # 'replace':                                  Key('c-h'),
         # 'replace all':                              Key('ca-enter'),
         'next field':                               Key('backtick'),
-        'dope <nn>':                                Key('cs-d:%(nn)d'),
-        'stupid dope <nn>':                         Key('wcs-d:%(nn)d'),
+        'dope [<nn>]':                              Key('cs-d:%(nn)d'),
+        'stupid dope [<nn>]':                       Key('wcs-d:%(nn)d'),
         'join lines':                               Key('c-j'),
-        'mopup <nn>':                               Key('cs-up:%(nn)d'),
-        'modos <nn>':                               Key('cs-down:%(nn)d'),
-        'curpup <nn>':                              Key('c-up:%(nn)d'),
-        'curdos <nn>':                              Key('c-down:%(nn)d'),
+        'mopup [<nn>]':                             Key('cs-up:%(nn)d'),
+        'modos [<nn>]':                             Key('cs-down:%(nn)d'),
+        'curpup [<nn>]':                            Key('c-up:%(nn)d'),
+        'curdos [<nn>]':                            Key('c-down:%(nn)d'),
         'comment':                                  Key('c-slash'),
         'uncomment':                                Key('c-slash'),
-        'indent <nn>':                              Key('c-rbracket:%(nn)d'),
-        'unindent <nn>':                            Key('c-lbracket:%(nn)d'),
-        'worm <nn>':                                Key('c-d:%(nn)d'),
+        'indent [<nn>]':                            Key('c-rbracket:%(nn)d'),
+        'unindent [<nn>]':                          Key('c-lbracket:%(nn)d'),
+        'worm [<nn>]':                              Key('c-d:%(nn)d'),
         'skip worm':                                Key('c-k,c-d'),
         'skip next worm':                           Key('c-d,c-k,c-d'),
         'worms':                                    Key('ca-d'),
         'make upper | upper case':                  Key('c-k,c-u'),
         'make lower | lower case':                  Key('c-k,c-l'),
         'make title | title case':                  Key('c-k,c-t'),
-        'lice <nn>':                                Key('c-enter:%(nn)d'),
-        'lice (pup | up) <nn>':                     Key('sc-enter:%(nn)d'),
-        'spur <nn>':                                Key('s-pgup:%(nn)d'),
-        'spar <nn>':                                Key('s-pgdown:%(nn)d'),
+        'lice [<nn>]':                              Key('c-enter:%(nn)d'),
+        'lice (pup | up) [<nn>]':                   Key('sc-enter:%(nn)d'),
+        'spur [<nn>]':                              Key('s-pgup:%(nn)d'),
+        'spar [<nn>]':                              Key('s-pgdown:%(nn)d'),
         'stitch':                                   Key('cwa-i'),
         'stouch':                                   Key('cwa-d'),
         'swap quotes':                              Key('cwa-q'),
         'swap brackets':                            Key('cwa-e'),
         'remove brackets':                          Key('cwa-r'),
         'show console':                             Key('c-backtick'),
-        'auto align':                               Key('cs-p') + Text('aligntablpm') +              Key('enter/100') + Text('/l(lu)*5') + Key('home'),
+        'auto align':                               Key('cs-p') + Text('aligntablpm') + Key('enter/100') + Text('/l(lu)*5') + Key('home'),
         # 'stark':                                    Key('cwa-a'),
         # 'lark | leet ark':                          Key('cwa-a,delete'),
         # '(nark | add ark) [after]':                 Key('cwa-a,right,comma,space'),
@@ -214,11 +216,16 @@ class EditActionsRule(MappingCountRule):
         '[set | toggle] mark': Key('c-f2'),
         '[see | stick] marks': Key('a-f2'),
         'clear marks': Key('ac-f2'),
-        }, 'edit_actions')
+        'num <bign>': Text('%(bign)d'),
+    })
+
+    extras = extras
+    defaults = defaults
+
 
 
 # This should use only the current file keywords
-quick_jump_keys = NoCompile(Choice(None, choices=aenea.misc.CHARACTERS), name = 'what')
+quick_jump_keys = NoCompile(Choice(None, choices=CHARACTERS), name = 'what')
 quick_jump_keywords = NoCompile(sublime_repeaters_vocabulary, name = 'what')
 quick_jump_rule = Alternative(
     children=[
@@ -235,9 +242,8 @@ keyword_rule = Compound('key <keyword>', [sublime_keyword_vocabulary], value_fun
 function_value_function = lambda n, e: Key('cw-semicolon') + e['function'] + Key('enter/10')
 function_rule = Compound('<function>', [sublime_function_vocabulary], value_func = function_value_function)
 
-multiples_function = lambda n, e: e['multiples'] * e['n']
-short_integer = ShortIntegerRef(name='n', min=1, max=10, default=1)
-multiples_rule = Compound('<multiples> [<n>]', [sublime_multiples_vocabulary, short_integer], value_func=multiples_function)
+multiples_function = lambda n, e: e['multiples'] * e['nn']
+multiples_rule = Compound('<multiples> [<nn>]', [sublime_multiples_vocabulary, extra_nn], value_func=multiples_function)
 
 
 # class SublimeFormatRule(FormatRule):
@@ -267,16 +273,15 @@ class SublimeRepeatRule(RepeatRule):
         keyword_rule,
         function_rule,
         RuleRef(rule=EditActionsRule()),
-        RuleRef(rule=SymbolRule(mapping=sublime_symbol_mapping)),
+        RuleRef(rule=SymbolRule()),
+        RuleRef(rule=ShortSnippetsRule(mapping=sublime_short_snippets)),
         RuleRef(rule=SmallSnippetsRule()),
-        RuleRef(rule=NumberRule()),
         RuleRef(rule=LetterRule()),
-        RuleRef(rule=CommonKeysRule(mapping=sublime_common_keys_mapping)),
+        RuleRef(rule=CommonKeysRule(mapping=sublime_common_keys_mapping, extras=[Optional(extra_nn, name='nn', default=1)])),
         # RuleRef(rule = MouseRule()),
-        RuleRef(rule = ChainFormatRule()),
+        RuleRef(rule=ChainFormatRule()),
     ]
     finishers = [
-        # RuleRef(rule =PriorityFinishersRule()),
         browse_common_folder_rule,
         sublime_finishers_dynamic_vocabulary,
         function_format_rule,
@@ -285,7 +290,7 @@ class SublimeRepeatRule(RepeatRule):
         RuleRef(rule=FinisherRule(), name='finisher'),
         RuleRef(rule=ScrollRule()),
         RuleRef(rule=WindowsRule()),
-        RuleRef(rule = SwapProgramRule()),
+        RuleRef(rule=SwapProgramRule()),
     ]
 
 

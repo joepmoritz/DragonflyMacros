@@ -29,7 +29,7 @@ class OtherChromeRepeatablesRule(MappingRule):
         # 'top frame':     DragonKey('g,s-f'),
         # 'next frame':    DragonKey('g,f'),
         'add bookmark':  DragonKey('c-d'), # 'w-d'
-        'copy address':  DragonKey('a-d,c-c'), # 'w-l,w-c'
+        'copy address':  DragonKey('a-d/10,c-c'), # 'w-l,w-c'
         'open':          DragonKey('enter'),
         'input':         DragonKey('g,i'),
     }
@@ -72,6 +72,7 @@ other_chrome_grammar.load()
 
 aenea.vocabulary.add_window_title_tag('Overleaf', 'latex_file')
 aenea.vocabulary.add_window_title_tag('LinkedIn', 'linked_in')
+aenea.vocabulary.add_window_title_tag('- Quip', 'quip')
 
 
 def unload():

@@ -100,6 +100,11 @@ sublime_projects = [
 		'project_name': 'multi_seed',
 		# 'desktop_name': 'work',
 	},
+	{
+		'speech': 'lime lineariser',
+		'project_name': 'lineariser',
+		# 'desktop_name': 'work',
+	},
 	# {
 	# 	'speech': '[lime] terminals',
 	# 	'project_name': 'Terminals',
@@ -110,12 +115,14 @@ sublime_projects = [
 common_folders = [
 	{
 		'speech': 'personal',
-		'jump_point': 'Personal',
 		'path': '~/Personal',
 	},
 	{
-		'speech': 'downloads',
-		'jump_point': 'Downloads',
+		'speech': '(win | windows) downloads',
+		'path': 'C:/Users/Joep Moritz/Downloads',
+	},
+	{
+		'speech': '[Linux] downloads',
 		'path': '~/Downloads',
 	},
 	{
@@ -179,6 +186,11 @@ common_folders = [
 		'desktop_name': 'work',
 	},
 	{
+		'speech': 'lineariser',
+		'path': '~/Projects/WorldAR/lineariser',
+		'desktop_name': 'work',
+	},
+	{
 		'speech': 'Google Drive',
 		'jump_point': 'Google Drive',
 		'path': '/Users/joepmoritz/Google Drive',
@@ -191,26 +203,85 @@ for cf in common_folders:
 
 
 
-common_websites = {
-	'maps':       'https://www.google.co.uk/maps',
-	'nationwide': 'https://onlinebanking.nationwide.co.uk/AccessManagement/Login',
-	'lloyds':     'https://online.lloydsbank.co.uk/personal/logon/login.jsp',
-	'ING':        'https://www.ing.nl/particulier/index.html',
-	'scholar':    'https://scholar.google.co.uk/',
-	'TFL':        'tfl.gov.uk',
-	'Guardian':   'https://www.theguardian.com/international',
-	'VK':         'www.vk.nl',
-	'LinkedIn':   'www.linkedin.com',
-	'photos':     'photos.google.com',
-	'sheets':     'https://docs.google.com/spreadsheets/u/0/',
-	'dropbox':    'www.dropbox.com',
-	'amazon':     'https://www.amazon.co.uk/',
-	'booking.com': 'www.booking.com',
-	'indeed': 'www.indeed.co.uk',
-	'indeed . CH': 'www.indeed.ch',
-	'glass door': 'www.glassdoor.com',
-	'sky scanner': 'www.skyscanner.net',
-	'Google drive': 'drive.google.com',
-	'national rail': 'www.nationalrail.co.uk',
-	'Google keep': 'https://keep.google.com/',
-}
+common_websites = [
+	{
+		'speech': 'maps',
+		'url': 'https://www.google.co.uk/maps',
+	},
+	{
+		'speech': 'nationwide',
+		'url': 'https://onlinebanking.nationwide.co.uk/AccessManagement/Login',
+	},
+	{
+		'speech': 'lloyds',
+		'url': 'https://online.lloydsbank.co.uk/personal/logon/login.jsp',
+	},
+	{
+		'speech': 'ING',
+		'url': 'https://www.ing.nl/particulier/index.html',
+	},
+	{
+		'speech': 'scholar',
+		'url': 'https://scholar.google.co.uk/',
+	},
+	{
+		'speech': 'TFL',
+		'url': 'tfl.gov.uk',
+	},
+	{
+		'speech': 'Guardian',
+		'url': 'https://www.theguardian.com/international',
+	},
+	{
+		'speech': 'VK',
+		'url': 'www.vk.nl',
+	},
+	{
+		'speech': 'LinkedIn',
+		'url': 'www.linkedin.com',
+	},
+	{
+		'speech': 'photos',
+		'url': 'photos.google.com',
+	},
+	{
+		'speech': 'sheets',
+		'url': 'https://docs.google.com/spreadsheets/u/0/',
+	},
+	{
+		'speech': 'dropbox',
+		'url': 'www.dropbox.com',
+	},
+	{
+		'speech': 'amazon',
+		'url': 'https://www.amazon.co.uk/',
+	},
+	{
+		'speech': 'booking.com',
+		'url': 'www.booking.com',
+	},
+	{
+		'speech': 'indeed',
+		'url': 'www.indeed.co.uk',
+	},
+	{
+		'speech': 'glass door',
+		'url': 'www.glassdoor.com',
+	},
+	{
+		'speech': 'sky scanner',
+		'url': 'www.skyscanner.net',
+	},
+	{
+		'speech': 'Google drive',
+		'url': 'drive.google.com',
+	},
+	{
+		'speech': 'national rail',
+		'url': 'www.nationalrail.co.uk',
+	},
+	{
+		'speech': 'Google keep',
+		'url': 'https://keep.google.com/',
+	},
+]

@@ -7,6 +7,7 @@ from dragonfly import *
 
 from SwapProgram import SwapProgramRule
 from util import DictateWords, NoCompile, MappingCountRule, RepeatRule
+from letters import *
 # from tobii import *
 
 DEFAULT_KEY = DragonKey
@@ -165,9 +166,6 @@ common_keys_mapping = {
 	# 'dop <nn>':    's-pgdown/10:%(nn)d,del',
 }
 
-letter_mapping = aenea.misc.LETTERS
-symbol_mapping = aenea.misc.SYMBOLS
-
 format_mapping = {
 	'score <score_text>': '%(score_text)s',
 	'titan <titan_text>': '%(titan_text)s',
@@ -208,11 +206,15 @@ def CommonKeysRule(mapping=common_keys_mapping, extras=[nn], defaults=nn1, map_f
 	return create_mapping_rule(mapping=mapping, map_func=lambda f: f(map_func), extras=extras, defaults=defaults, **kwargs)
 
 
-def LetterRule(mapping=letter_mapping, map_func=DEFAULT_KEY, **kwargs):
+def LetterRule(mapping=LETTERS, map_func=DEFAULT_KEY, **kwargs):
 	return create_mapping_rule(mapping=mapping, map_func=map_func, **kwargs)
 
 
-def SymbolRule(mapping=symbol_mapping, map_func=DEFAULT_KEY, **kwargs):
+def SymbolRule(mapping=SYMBOLS, map_func=DEFAULT_KEY, **kwargs):
+	return create_mapping_rule(mapping=mapping, map_func=map_func, **kwargs)
+
+
+def ShortSnippetsRule(mapping=SHORT_SNIPPETS, map_func=DEFAULT_KEY, **kwargs):
 	return create_mapping_rule(mapping=mapping, map_func=map_func, **kwargs)
 
 
@@ -284,6 +286,7 @@ common_repeatable_rules = [
 	NumberRule(),
 	LetterRule(),
 	SymbolRule(),
+	ShortSnippetsRule(),
 	CommonKeysRule(),
 ]
 

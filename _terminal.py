@@ -1,6 +1,5 @@
 import aenea.config
 import aenea.configuration
-import aenea.misc
 import aenea.vocabulary
 
 from dragonfly import *
@@ -49,7 +48,8 @@ class OtherTerminalRepeatablesRule(MappingRule):
         'C H mod': Text('chmod '),
         'change mod': Text('chmod '),
 
-        'create branch [<dash_word_text>]': Text('g go jm/%(dash_word_text)s'),
+        '[create | go] branch [<dash_word_text>]': Text('g go jm/%(dash_word_text)s'),
+        'check out branch [<dash_word_text>]': Text('gco jm/%(dash_word_text)s'),
         'show commit <nn>': Text('gsi %(nn)d'),
     })
 

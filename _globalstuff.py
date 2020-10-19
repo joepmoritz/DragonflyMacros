@@ -2,7 +2,6 @@
 
 import aenea.config
 import aenea.configuration
-import aenea.misc
 from aenea.vocabulary import add_window_executable_tag, add_window_title_tag, register_dynamic_vocabulary
 import sound
 

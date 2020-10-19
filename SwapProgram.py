@@ -31,7 +31,7 @@ command_mode = Function(switch_to_command_mode)
 # normal_mode = NoAction()
 # command_mode = NoAction()
 bring_notepad = BringApp('Notepad.exe') + Pause('100')
-# bring_chrome =  BringApp('chrome.exe')
+bring_chrome =  BringApp('chrome.exe') + normal_mode
 # bring_chrome = BringApp(process_name='WinAppHelper', process_title='Google Chrome', window_not='Slack')
 bring_commit_message = BringApp(['notepad.exe', r'Z:\.GIT_COMMIT_MSG'], title='.GIT_COMMIT_MSG')
 remember_window = Key('cw-f3/10')
@@ -47,7 +47,7 @@ def BringWebsite(title, w1, w2, url):
 	jump_website_action = BringWindow(w1, w2) + Key('c-m/20,del/40') + Text(url) + Pause('50') + Key('enter')
 	return BringChrome(title, start_action=jump_website_action)
 
-bring_chrome = BringWindow(1, 1) + normal_mode
+# bring_chrome = BringWindow(1, 1) + normal_mode
 
 
 swap_program_mapping = {
@@ -55,9 +55,10 @@ swap_program_mapping = {
 	'command mode': command_mode,
 	'net link messages': FocusWindow(title = 'Messages from Python Macros'),
 
-	# '[work] chrome':               bring_chrome,
+	'chrome':                    bring_chrome,
 	# '[work] chrome <n>':           Key('win:down/10,1:%(n)d/10,win:up/10'Slack) + normal_mode,
-	'[work] chrome [<n>]':         BringWindow(1, '%(n)d') + normal_mode,
+	'[work] chrome <n>':         BringWindow(1, '%(n)d') + normal_mode,
+	'work chrome':               BringWindow(1, 1) + normal_mode,
 	# '[work] chrome <w2>':          Function(BringWindow, w1=3),
 	'home chrome [<n>]':            BringWindow(3, '%(n)d') + normal_mode,
 	# '<desktop_name> chrome':       Key('cw-%(desktop_name)d') + Pause('50') + bring_chrome + normal_mode,
@@ -103,13 +104,13 @@ swap_program_mapping = {
 	# 'Reload AutoHotKey': StartApp('MyScripts.ahk', cwd='C:/Users/Joep/Google Drive/ScriptsAndSettings/AutoHotkeyScripts', shell=True),
 }
 
-swap_program_mapping['websites scholar'] = Key('cw-%d/50,f6/50,c-t' % desktop_names['work']) + Text('%s\n' % common_websites['scholar'], pause = 0) + normal_mode
+# swap_program_mapping['websites scholar'] = Key('cw-%d/50,f6/50,c-t' % desktop_names['work']) + Text('%s\n' % common_websites['scholar'], pause = 0) + normal_mode
 
 
 for sublime_project in sublime_projects:
 	project_name = sublime_project['project_name']
-	start_action = BringApp('sublime_text.exe') + Pause('50') + Key('ca-p') + Pause('10') + Text(project_name) + Key('enter')
-	bring_action = BringApp('sublime_text.exe', title=u'— '+project_name, start_action=start_action)
+	start_action = BringApp('sublime_text.exe') + Pause('50') + Key('ca-p') + Pause('50') + Text(project_name) + Key('enter')
+	# bring_action = BringApp('sublime_text.exe', title=u'— '+project_name, start_action=start_action)
 	bring_action = BringApp('sublime_text.exe', title=u'('+project_name+')', start_action=start_action)
 	action = bring_action + command_mode
 	if 'desktop_name' in sublime_project:
@@ -265,6 +266,7 @@ for folder in common_folders:
 
 
 small_integer = ShortIntegerRef(min=1, max=9, name='n')
+common_websites_choice = { w['speech']: w['url'] for w in common_websites }
 
 class SwapProgramRule(MappingRule):
 	mapping = swap_program_mapping
@@ -275,7 +277,7 @@ class SwapProgramRule(MappingRule):
 		RuleRef(small_integer.rule, "w2"),
 		DictateWords('text'),
 		# Choice(name = 'quick_folder', choices = common_folders),
-		Choice(name = 'common_websites', choices = common_websites),
+		Choice(name = 'common_websites', choices = common_websites_choice),
 		Choice(name = 'desktop_name', choices = desktop_names),
 	]
 	defaults = {'n': 1}

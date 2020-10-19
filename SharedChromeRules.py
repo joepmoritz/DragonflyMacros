@@ -7,6 +7,7 @@ import aenea.config
 import aenea.configuration
 
 from util import MappingCountRule, NoCompile
+from letters import LETTERS
 
 hint_first_letters = ['l', 'm', 'r', 't', 's', 'g', 'y', 'f', 'j', 'sl', 'fl', 'gl', 'br', 'st', 'tr', 'cr']
 jump_letters_direct = {fl + 'o': i for i, fl in enumerate(hint_first_letters)}
@@ -36,7 +37,7 @@ def SendCommandToClickByVoiceDragon(command):
 	def go():
 		temporary = Clipboard({Clipboard.format_text: command})
 		temporary.copy_to_system()
-		DragonKey('cs-dot/100').execute()
+		DragonKey('cs-dot/10').execute()
 
 	try:
 		original = Clipboard(from_system=True)
@@ -81,6 +82,8 @@ class SharedChromeRepeatablesRule(MappingCountRule):
 		'zoom in <nn>':             DragonKey('c-plus:%(nn)d'),
 		'zoom out <nn>':            DragonKey('c-minus:%(nn)d'),
 		'zoom reset':               DragonKey('c-0'),
+		'enable clicks':            DragonKey('c-space/10,colon,plus,a,enter'),
+		'disable clicks':           DragonKey('c-space/10,colon,minus,enter'),
 		# 'links':                    DragonKey('c-m'),
 		# 'tinks':                    DragonKey('c-k'),
 		# 'multi links':              DragonKey('a-f'),
@@ -120,7 +123,7 @@ class SharedChromeRepeatablesRule(MappingCountRule):
 		Choice(name = 'jl_hover', choices = jump_letters_hover),
 		Choice(name = 'jl_copy_url', choices = jump_letters_copy_url),
 		Choice(name = 'jl_copy_text', choices = jump_letters_copy_text),
-		Choice(choices = aenea.misc.LETTERS, name = 'letter'),
+		Choice(choices = LETTERS, name = 'letter'),
 	]
 
 

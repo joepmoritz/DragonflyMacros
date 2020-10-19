@@ -12,7 +12,8 @@
         "import pandas":     "import pandas as pd",
         "import print":      "from pprint import pprint as pp",
         "private":           [{"type": "Text", "args": ["____"]}, {"type": "Key", "args": ["left:2"]}],
-        "dock string":       [{"type": "Text", "args": ["''''''"]}, {"type": "Key", "args": ["left:3"]}],
-        "dub dock string":   [{"type": "Text", "args": ["\"\"\"\"\"\""]}, {"type": "Key", "args": ["left:3"]}]
+        "dock param": ":param :{{left}}",
+        "dock string": "'''",
+        "dub dock string": "\"\"\""
     }
 }

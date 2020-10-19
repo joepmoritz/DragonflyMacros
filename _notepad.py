@@ -1,6 +1,5 @@
 import aenea.config
 import aenea.configuration
-import aenea.misc
 import aenea.vocabulary
 
 from dragonfly import *
